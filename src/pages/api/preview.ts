@@ -1,4 +1,4 @@
-import Prismic from 'prismic-javascript';
+import Prismic from '';
 import { PRISMIC_API } from '../../lib/consts';
 import { resolveLink } from '../../lib/prismic';
 
