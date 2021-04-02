@@ -34,6 +34,7 @@ const styles = {
   `,
   image: css`
     height: 100%;
+    width: auto !important;
     margin-right: 1rem;
   `
 };
