@@ -14,7 +14,8 @@ import { pageGrid } from '../styles/mixins';
 const styles = {
   main: css`
     ${pageGrid}
-    padding-top: var(--spacing-3)
+    padding-top: var(--spacing-3);
+    overflow: hidden;
   `
 };
 

@@ -25,7 +25,6 @@ export default [
       font-weight: var(--font-weight-default);
       line-height: var(--leading-default);
       position: relative;
-      overflow: hidden;
     }
 
     a {
