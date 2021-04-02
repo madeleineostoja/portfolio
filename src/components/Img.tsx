@@ -23,9 +23,13 @@ export function Img({
   alt = '',
   height,
   width,
+  sizes,
   className,
+  onClick,
   ...props
 }: ImgProps) {
+  const src = prismic?.url.split(/[?#]/)[0];
+
   return (
     <Imgix
       className={`lazyload blur-up ${className}`}
@@ -41,22 +45,20 @@ export function Img({
           filter: blur(0);
         }
       `}
-      src={prismic?.url || ''}
-      width={width || prismic?.dimensions?.width}
-      height={height || prismic?.dimensions?.height}
+      src={src || ''}
+      sizes={sizes}
       attributeConfig={{
         src: 'data-src',
         srcSet: 'data-srcset',
         sizes: 'data-sizes'
       }}
       htmlAttributes={{
-        src: `${
-          prismic?.url.split(/[?#]/)[0]
-        }?w=0.5&blur=200&px=16&auto=format&colorquant=150`,
+        src: `${src}?w=0.5&blur=200&px=16&auto=format&colorquant=150`,
         loading: 'lazy',
         alt,
-        ...props
+        onClick
       }}
+      {...props}
     />
   );
 }

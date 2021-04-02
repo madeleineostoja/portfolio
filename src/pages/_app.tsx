@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { DefaultSeo } from 'next-seo';
-import NextApp, { AppContext, AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'pollen-css';
 import 'react-medium-image-zoom/dist/styles.css';

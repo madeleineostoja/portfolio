@@ -140,7 +140,7 @@ export function Lightbox({
                   css={styles.image}
                   prismic={image}
                   alt={title}
-                  sizes="100vw"
+                  sizes="80vw"
                 />
                 <h1 css={styles.title}>{title}</h1>
               </div>
