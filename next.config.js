@@ -19,9 +19,6 @@ module.exports = withPlugins(
   {
     target: 'serverless',
     poweredByHeader: false,
-    future: {
-      webpack5: true
-    },
     typescript: {
       ignoreBuildErrors: true
     },

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { HamburgerIcon } from 'react-hamburger-icon';
 import { Overlay } from 'react-portal-overlay';
-import { ReactComponent as MailIcon } from '../../assets/icons/gmail.svg';
+import { ReactComponent as MailIcon } from '../../assets/icons/mail.svg';
 import { ReactComponent as InstagramIcon } from '../../assets/icons/instagram.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/icons/twitter.svg';
 import { mobile } from '../../styles/breakpoints';
@@ -32,13 +32,15 @@ const styles = {
     }
   `,
   navIcon: css`
-    width: var(--scale-1);
-    height: var(--scale-1);
+    fill: currentColor;
+    width: var(--scale-3);
+    height: var(--scale-3);
     @media (min-width: ${mobile}) {
       width: 1em;
       height: 1em;
     }
   `,
+
   hamburger: css`
     z-index: var(--layer-top);
     @media (min-width: ${mobile}) {
@@ -57,7 +59,7 @@ const styles = {
     align-items: center;
     justify-content: center;
     & > * {
-      margin: 0 1rem;
+      margin: 0 1.5rem;
     }
   `
 };
