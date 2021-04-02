@@ -11,9 +11,13 @@ export function Link({
   children,
   ...props
 }: typeof NextLink['props'] & HTMLProps<HTMLAnchorElement>) {
+  const isExternal = /^https?:\/\//i.test(href);
+
   return (
     <NextLink {...{ href, as, shallow }}>
-      <a {...props}>{children}</a>
+      <a {...props} target={isExternal ? '_blank' : ''}>
+        {children}
+      </a>
     </NextLink>
   );
 }

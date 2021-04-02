@@ -3,29 +3,22 @@ import { DefaultSeo } from 'next-seo';
 import NextApp, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import 'pollen-css';
-import { shimmie } from 'pollen-css/utils';
-import { useEffect } from 'react';
-import { GlobalData } from '../lib/GlobalData';
+import 'react-medium-image-zoom/dist/styles.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import 'typeface-inter';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
 import globalStyles from '../styles';
+import { pageGrid } from '../styles/mixins';
 
 const styles = {
   main: css`
-    display: grid;
-    position: relative;
-    min-height: 100vh;
-    grid-template-columns: var(--grid-page);
-    align-items: start;
-    & > * {
-      grid-column: 2 / 3;
-    }
+    ${pageGrid}
+    padding-top: var(--spacing-3)
   `
 };
 
 function App({ Component, pageProps }: AppProps & any) {
-  useEffect(() => {
-    shimmie();
-  }, []);
-
   return (
     <>
       <Global styles={globalStyles} />
@@ -49,11 +42,11 @@ function App({ Component, pageProps }: AppProps & any) {
         }}
       />
 
-      <GlobalData.Provider value={{}}>
-        <main css={styles.main}>
-          <Component {...pageProps} />
-        </main>
-      </GlobalData.Provider>
+      <main css={styles.main}>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </main>
     </>
   );
 }

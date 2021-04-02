@@ -91,6 +91,8 @@ export function resolveDocument(doc: PrismicDocLink) {
   switch (doc.type) {
     case 'home':
       return '/';
+    case 'collection':
+      return `/collections/${doc.uid}`;
     default:
       return `/${doc.uid}`;
   }

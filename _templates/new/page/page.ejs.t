@@ -10,14 +10,14 @@ import { Meta } from '../components/Meta';
 import { get } from '../lib/prismic';
 <% } -%>
 
+const styles = {};
+
 /**
  * <%= h.changeCase.sentence(name) %> page
  */
 export default function <%= h.changeCase.pascal(name) %>Page({
   <% if (staticProps) { -%>data<% } %>
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const styles = {};
-
   return (
     <>
       <Meta <% if (prismic) { %>title={data.meta_title} description={data.meta_description} <% } %> />

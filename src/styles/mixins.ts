@@ -1,14 +1,15 @@
 import { css } from '@emotion/react';
 import { subgrid } from 'satchel-css';
 
-/** Global breakpoints */
-export type BreakpointKey = keyof typeof BREAKPOINTS;
-export const BREAKPOINTS = {
-  mobile: '36em',
-  tablet: '48em',
-  laptop: '62em',
-  desktop: '75em',
-};
+/** Page grid */
+export const pageGrid = css`
+  display: grid;
+  position: relative;
+  grid-template-columns: var(--grid-page);
+  & > * {
+    grid-column: 2 / 3;
+  }
+`;
 
 /** Subgrid with page container inheritence */
 export const subPageGrid = css`

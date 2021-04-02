@@ -1,62 +1,62 @@
+import Imgix from 'react-imgix';
+import 'lazysizes';
 import { css } from '@emotion/react';
-import Image, { ImageProps } from 'next/image';
-import { useState } from 'react';
+import 'lazysizes/plugins/blur-up/ls.blur-up';
+import { HTMLProps, LegacyRef } from 'react';
 
 export type PrismicImg = {
   url: string;
-  alt?: string;
-  dimensions: { height: number; width: number };
+  dimensions?: { height: number; width: number };
 };
 
-export type ImgProps = Partial<ImageProps> & {
-  /** Prismic data shorthand */
-  prismic?: PrismicImg;
-  /** Next Image layout setting */
-  layout?: 'fixed' | 'responsive' | 'intrinsic' | undefined;
-};
+export type ImgProps = Partial<Imgix['props']> &
+  Partial<HTMLProps<HTMLImageElement>> & {
+    prismic: PrismicImg;
+    ref?: LegacyRef<Imgix> | undefined;
+  };
 
 /**
  * Responsive, lazy-loaded image component
  */
 export function Img({
   prismic,
-  layout = 'responsive',
-  className,
-  src,
-  alt,
+  alt = '',
   height,
   width,
+  className,
   ...props
 }: ImgProps) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
-    <div
+    <Imgix
+      className={`lazyload blur-up ${className}`}
       css={css`
-        width: 100%;
+        &:global(.blur-up) {
+          -webkit-filter: blur(5px);
+          filter: blur(5px);
+          transition: filter 400ms, -webkit-filter 400ms;
+        }
+
+        &:global(.blur-up.lazyloaded) {
+          -webkit-filter: blur(0);
+          filter: blur(0);
+        }
       `}
-      className={className}
-    >
-      {!loaded && prismic ? (
-        <img
-          src={`${prismic?.url}?w=0.5&blur=200&px=16&auto=format&colorquant=150`}
-        />
-      ) : (
-        <Image
-          src={src || prismic?.url || ''}
-          alt={alt || prismic?.alt || ''}
-          width={width || prismic?.dimensions?.width || ''}
-          height={height || prismic?.dimensions?.height || ''}
-          layout={layout}
-          loading="lazy"
-          objectFit="cover"
-          onLoad={() => setLoaded(true)}
-          css={css`
-            visibility: ${loaded ? 'visible' : 'hidden'} !important;
-          `}
-          {...props}
-        />
-      )}
-    </div>
+      src={prismic?.url || ''}
+      width={width || prismic?.dimensions?.width}
+      height={height || prismic?.dimensions?.height}
+      attributeConfig={{
+        src: 'data-src',
+        srcSet: 'data-srcset',
+        sizes: 'data-sizes'
+      }}
+      htmlAttributes={{
+        src: `${
+          prismic?.url.split(/[?#]/)[0]
+        }?w=0.5&blur=200&px=16&auto=format&colorquant=150`,
+        loading: 'lazy',
+        alt,
+        ...props
+      }}
+    />
   );
 }

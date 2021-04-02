@@ -8,14 +8,18 @@ import { css } from '@emotion/react';
 export default css`
   :root {
     /* Typography */
+    --font-sans: 'Inter', sans-serif;
+    --font-weight-bold: 600;
+    --font-weight-default: 500;
 
     /* Colours */
     --color-text: var(--color-black);
     --color-text-secondary: var(--color-grey-700);
+    --color-primary: #d71673;
 
     /* Layout — Page */
     --content-max-width: 80rem;
-    --page-gutter: 6vw;
+    --page-gutter: 8vw;
     --page-gutter-offset: calc(0px - var(--page-gutter));
     --grid-page: minmax(var(--page-gutter), 1fr)
       minmax(0, var(--content-max-width)) minmax(var(--page-gutter), 1fr);
