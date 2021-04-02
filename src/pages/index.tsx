@@ -26,7 +26,11 @@ export default function HomePage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Meta title={data.meta_title} description={data.meta_description} />
+      <Meta
+        title={data.meta_title}
+        description={data.meta_description}
+        cover={data.meta_cover.url}
+      />
 
       <div css={styles.collections}>
         {data.collections.map(({ collection }: any) => {

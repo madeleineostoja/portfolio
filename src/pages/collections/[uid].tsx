@@ -76,7 +76,11 @@ export default function CollectionPage({
 
   return (
     <>
-      <Meta title={data.meta_title} description={data.meta_description} />
+      <Meta
+        title={data.meta_title}
+        description={data.meta_description}
+        cover={data.photos[0].photo.url}
+      />
       <div css={styles.wrapper}>
         <section css={styles.gallery}>
           <SectionHeader
