@@ -14,7 +14,7 @@ const styles = {
     ${subPageGrid}
   `,
   collection: css`
-    margin-bottom: var(--spacing-4);
+    margin-bottom: var(--spacing-5);
   `
 };
 

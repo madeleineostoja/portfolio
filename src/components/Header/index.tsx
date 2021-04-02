@@ -15,7 +15,7 @@ const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-6);
+    margin-bottom: var(--spacing-7);
   `,
   logo: css`
     font-weight: var(--font-weight-bold);
