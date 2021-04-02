@@ -51,12 +51,4 @@ function App({ Component, pageProps }: AppProps & any) {
   );
 }
 
-// Should be getStaticProps, but not supported in _app yet
-// See https://github.com/vercel/next.js/discussions/10949
-App.getInitialProps = async (appContext: AppContext) => {
-  return {
-    ...(await NextApp.getInitialProps(appContext))
-  };
-};
-
 export default App;

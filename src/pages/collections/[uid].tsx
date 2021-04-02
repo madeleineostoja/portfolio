@@ -70,6 +70,10 @@ export default function CollectionPage({
     selected: 0
   });
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <>
       <Meta title={data.meta_title} description={data.meta_description} />
@@ -136,7 +140,7 @@ export const getStaticProps: GetStaticProps = async (
     context
   );
 
-  return data
+  return !!data
     ? {
         props: {
           data,
