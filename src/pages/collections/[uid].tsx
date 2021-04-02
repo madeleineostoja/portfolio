@@ -54,8 +54,11 @@ const styles = {
     }
   `,
   image: css`
-    margin-bottom: var(--spacing-1);
-    cursor: zoom-in;
+    display: inline-block;
+    padding-bottom: var(--spacing-1);
+    & img {
+      cursor: zoom-in;
+    }
   `
 };
 
@@ -94,13 +97,14 @@ export default function CollectionPage({
           />
           <div css={styles.images}>
             {data.photos.map(({ photo, photo_title }: any, i: number) => (
-              <Img
-                onClick={() => setLightbox({ open: true, selected: i })}
-                css={styles.image}
-                prismic={photo}
-                alt={photo_title}
-                sizes={`(max-width: ${mobile}) 100vw, (max-width: ${tablet}) 50vw, 33vw`}
-              />
+              <div css={styles.image}>
+                <Img
+                  onClick={() => setLightbox({ open: true, selected: i })}
+                  prismic={photo}
+                  alt={photo_title}
+                  sizes={`(max-width: ${mobile}) 100vw, (max-width: ${tablet}) 50vw, 33vw`}
+                />
+              </div>
             ))}
           </div>
         </section>
