@@ -56,6 +56,8 @@ const styles = {
   image: css`
     display: inline-block;
     padding-bottom: var(--spacing-1);
+    /* HACK because CSS */
+    margin-bottom: -4px;
     & img {
       cursor: zoom-in;
     }
