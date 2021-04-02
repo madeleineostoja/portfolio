@@ -5,7 +5,7 @@ import { Overlay } from 'react-portal-overlay';
 import { ReactComponent as MailIcon } from '../../assets/icons/mail.svg';
 import { ReactComponent as InstagramIcon } from '../../assets/icons/instagram.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/icons/twitter.svg';
-import { mobile } from '../../styles/breakpoints';
+import { mobile, tablet } from '../../styles/breakpoints';
 import { pageGrid } from '../../styles/mixins';
 import { heading1 } from '../../styles/typesets';
 import { Link } from '../Link';
@@ -15,7 +15,10 @@ const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-7);
+    margin-bottom: var(--spacing-6);
+    @media (min-width: ${tablet}) {
+      margin-bottom: var(--spacing-8);
+    }
   `,
   logo: css`
     font-weight: var(--font-weight-bold);

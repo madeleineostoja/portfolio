@@ -7,6 +7,7 @@ import {
 import { Collection } from '../components/Collection';
 import { Meta } from '../components/Meta';
 import { get, plaintext, resolveDocument } from '../lib/prismic';
+import { mobile } from '../styles/breakpoints';
 import { subPageGrid } from '../styles/mixins';
 
 const styles = {
@@ -14,7 +15,12 @@ const styles = {
     ${subPageGrid}
   `,
   collection: css`
-    margin-bottom: var(--spacing-5);
+    &:not(:last-of-type) {
+      margin-bottom: var(--spacing-4);
+      @media (min-width: ${mobile}) {
+        margin-bottom: var(--spacing-5);
+      }
+    }
   `
 };
 
