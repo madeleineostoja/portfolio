@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
+import { HamburgerIcon } from 'react-hamburger-icon';
+import { Overlay } from 'react-portal-overlay';
 import { ReactComponent as MailIcon } from '../../assets/icons/gmail.svg';
 import { ReactComponent as InstagramIcon } from '../../assets/icons/instagram.svg';
 import { ReactComponent as TwitterIcon } from '../../assets/icons/twitter.svg';
-import { Link } from '../Link';
-import { HamburgerIcon } from 'react-hamburger-icon';
-import { Overlay } from 'react-portal-overlay';
-import { useState } from 'react';
+import { mobile } from '../../styles/breakpoints';
 import { pageGrid } from '../../styles/mixins';
 import { heading1 } from '../../styles/typesets';
-import { mobile } from '../../styles/breakpoints';
+import { Link } from '../Link';
 
 const styles = {
   header: css`

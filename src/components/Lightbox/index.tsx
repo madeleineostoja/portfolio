@@ -1,11 +1,11 @@
 import { css, Global } from '@emotion/react';
 import { Overlay } from 'react-portal-overlay';
-import { Img, ImgProps, PrismicImg } from '../Img';
 import { Carousel } from 'react-responsive-carousel';
-import { pageGrid } from '../../styles/mixins';
-import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
 import { ReactComponent as PrevIcon } from '../../assets/icons/caret-left.svg';
 import { ReactComponent as NextIcon } from '../../assets/icons/caret-right.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
+import { pageGrid } from '../../styles/mixins';
+import { Img, PrismicImg } from '../Img';
 
 type Image = {
   image: PrismicImg;

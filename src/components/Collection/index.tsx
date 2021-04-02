@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-import { Link } from '../Link';
 import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow.svg';
-import { Img, ImgProps, PrismicImg } from '../Img';
 import { subPageGrid } from '../../styles/mixins';
-import { heading1 } from '../../styles/typesets';
-import { mobile } from '../../styles/breakpoints';
+import { Img, ImgProps } from '../Img';
+import { Link } from '../Link';
 import { SectionHeader } from '../SectionHeader';
 
 export type CollectionProps = {

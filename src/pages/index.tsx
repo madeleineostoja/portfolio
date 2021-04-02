@@ -1,12 +1,12 @@
-import {
-  InferGetStaticPropsType,
-  GetStaticProps,
-  GetStaticPropsContext
-} from 'next';
 import { css } from '@emotion/react';
+import {
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType
+} from 'next';
+import { Collection } from '../components/Collection';
 import { Meta } from '../components/Meta';
 import { get, plaintext, resolveDocument } from '../lib/prismic';
-import { Collection } from '../components/Collection';
 import { subPageGrid } from '../styles/mixins';
 
 const styles = {

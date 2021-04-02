@@ -1,8 +1,8 @@
-import Imgix from 'react-imgix';
-import 'lazysizes';
 import { css } from '@emotion/react';
+import 'lazysizes';
 import 'lazysizes/plugins/blur-up/ls.blur-up';
 import { HTMLProps, LegacyRef } from 'react';
+import Imgix from 'react-imgix';
 
 export type PrismicImg = {
   url: string;
