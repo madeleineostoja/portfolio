@@ -15,9 +15,9 @@ const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
     @media (min-width: ${tablet}) {
-      margin-bottom: var(--spacing-6);
+      margin-bottom: var(--spacing-8);
     }
   `,
   logo: css`
