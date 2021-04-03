@@ -38,6 +38,20 @@ export default function HomePage({
         cover={data.meta_cover.url}
       />
 
+      {/* <p
+        css={css`
+          font-size: var(--scale-1);
+          max-width: 36rem;
+          line-height: 1.6;
+          color: var(--color-grey-700);
+          margin-bottom: var(--spacing-5);
+        `}
+      >
+        Madeleine Ostoja is a film photographer based in Wellington, New
+        Zealand. With a focus on the urban landscape, she captures people and
+        how they relate to their environments.
+      </p> */}
+
       <div css={styles.collections}>
         {data.collections.map(({ collection }: any) => {
           return (

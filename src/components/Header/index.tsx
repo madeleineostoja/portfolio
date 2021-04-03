@@ -15,9 +15,9 @@ const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-6);
+    margin-bottom: var(--spacing-3);
     @media (min-width: ${tablet}) {
-      margin-bottom: var(--spacing-8);
+      margin-bottom: var(--spacing-6);
     }
   `,
   logo: css`
@@ -101,13 +101,15 @@ export function Header(props: any) {
 
       <Overlay open={mobNavOpen} closeOnEsc={true} onClose={closeMenu}>
         <div css={styles.mobMenu}>
-          <Link
-            css={heading1}
-            onClick={closeMenu}
-            href="https://madi.darkroom.tech"
-          >
-            Prints
-          </Link>
+          <nav>
+            <Link
+              css={heading1}
+              onClick={closeMenu}
+              href="https://madi.darkroom.tech"
+            >
+              Prints
+            </Link>
+          </nav>
           <div css={styles.mobSocials}>
             <Link
               onClick={closeMenu}

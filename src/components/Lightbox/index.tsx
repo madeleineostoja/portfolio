@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { ReactComponent as PrevIcon } from '../../assets/icons/caret-left.svg';
 import { ReactComponent as NextIcon } from '../../assets/icons/caret-right.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg';
+import { mobile } from '../../styles/breakpoints';
 import { pageGrid } from '../../styles/mixins';
 import { Img, PrismicImg } from '../Img';
 
@@ -35,8 +36,10 @@ const styles = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-3);
     height: 100vh;
+    @media (min-width: ${mobile}) {
+      padding: var(--spacing-3);
+    }
   `,
   image: css`
     width: auto !important;
@@ -60,8 +63,13 @@ const styles = {
     right: 0;
   `,
   nav: css`
-    top: 50%;
-    transform: translateY(-50%);
+    @media (max-width: ${mobile}) {
+      bottom: var(--spacing-3);
+    }
+    @media (min-width: ${mobile}) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
   `
 };
 
