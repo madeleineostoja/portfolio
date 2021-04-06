@@ -45,7 +45,7 @@ const styles = {
   `,
   images: css`
     columns: 1;
-    column-gap: var(--spacing-1);
+    column-gap: var(--grid-gap);
     @media (min-width: ${mobile}) {
       columns: 2;
     }
@@ -55,7 +55,7 @@ const styles = {
   `,
   image: css`
     display: inline-block;
-    padding-bottom: var(--spacing-1);
+    padding-bottom: var(--grid-gap);
     /* HACK because CSS */
     margin-bottom: -4px;
     & img {

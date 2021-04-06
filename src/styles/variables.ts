@@ -26,6 +26,7 @@ export default css`
     --grid-content: repeat(12, 1fr);
 
     /* Layout — Constants */
+    --grid-gap: 0.75rem;
 
     /* UI */
   }
