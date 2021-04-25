@@ -4,6 +4,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType
 } from 'next';
+import { Home } from '../../.graphql/types';
 import { Collection } from '../components/Collection';
 import { Meta } from '../components/Meta';
 import { get, plaintext, resolveDocument } from '../lib/prismic';
@@ -27,9 +28,7 @@ const styles = {
 /**
  * Home page
  */
-export default function HomePage({
-  data
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function HomePage({ data }: { data: Home }) {
   return (
     <>
       <Meta

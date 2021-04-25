@@ -3,6 +3,7 @@ node_modules
 
 # Runtime
 /.next
+/@types/_generated
 .env.*
 *.log*
 
