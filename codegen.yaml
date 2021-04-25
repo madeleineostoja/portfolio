@@ -1,0 +1,12 @@
+customFetch: 'codegen-prismic-fetch'
+schema: https://madeleineostoja.cdn.prismic.io/graphql
+documents: 'src/**/*'
+generates:
+  ./.graphql/types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - fragment-matcher
+    config:
+      maybeValue: T | undefined
+      apolloClientVersion: 3

@@ -22,7 +22,7 @@ const styles = {
   `
 };
 
-function App({ Component, pageProps }: AppProps & any) {
+export default function App({ Component, pageProps }: AppProps & any) {
   const router = useRouter();
 
   useEffect(() => {
@@ -59,5 +59,3 @@ function App({ Component, pageProps }: AppProps & any) {
     </>
   );
 }
-
-export default App;

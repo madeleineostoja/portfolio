@@ -5,7 +5,7 @@ import { HTMLProps } from 'react';
  * Link wrapper
  */
 export function Link({
-  href,
+  href = '',
   as,
   shallow,
   children,
