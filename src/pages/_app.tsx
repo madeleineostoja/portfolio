@@ -2,12 +2,15 @@ import { css, Global } from '@emotion/react';
 import { DefaultSeo } from 'next-seo';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import 'pollen-css';
+import { useEffect } from 'react';
 import 'react-medium-image-zoom/dist/styles.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'typeface-inter';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { pageview } from '../lib/gtag';
 import globalStyles from '../styles';
 import { pageGrid } from '../styles/mixins';
 
@@ -20,6 +23,11 @@ const styles = {
 };
 
 function App({ Component, pageProps }: AppProps & any) {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', (url: URL) => pageview(url));
+  }, [router.events]);
   return (
     <>
       <Global styles={globalStyles} />
