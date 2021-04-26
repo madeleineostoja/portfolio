@@ -94,6 +94,7 @@ export default function PhotoPage({
   }
 
   const { photos } = collection.data,
+    /** @ts-ignore */
     current = photos?.findIndex(({ photo }) => photo?.uid === data.uid);
 
   return (
@@ -117,7 +118,11 @@ export default function PhotoPage({
         </div>
         <div css={styles.frame}>
           <div css={styles.photo}>
-            <Img prismic={data.photo} />
+            <Img
+              sizes={`(max-width: ${tablet}) 100vw, 50vw`}
+              prismic={data.photo}
+              key={data.photo.uid}
+            />
           </div>
 
           <nav css={styles.nav}>
