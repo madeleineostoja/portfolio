@@ -121,7 +121,7 @@ export default function PhotoPage({
             <Img
               sizes={`(max-width: ${tablet}) 100vw, 50vw`}
               prismic={data.photo}
-              key={data.photo.uid}
+              key={data.uid}
             />
           </div>
 
