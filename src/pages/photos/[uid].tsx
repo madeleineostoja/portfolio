@@ -114,7 +114,7 @@ export default function PhotoPage({
           <h1 css={heading1}>{data.title}</h1>
           <p
             css={styles.description}
-          >{`Shot on ${data.film}, with the ${data.camera}`}</p>
+          >{`Captured on ${data.film} film, with the ${data.camera}`}</p>
         </div>
         <div css={styles.frame}>
           <div css={styles.photo}>
