@@ -63,7 +63,7 @@ export function Collection({ name, href, photos, ...props }: CollectionProps) {
       <div css={styles.photos}>
         {photos.map(({ photo, title, uid }) => (
           <Img
-            onClick={() => router.push(`/photo/${uid}`)}
+            onClick={() => router.push(`/photos/${uid}`)}
             sizes="450px"
             css={styles.photo}
             prismic={photo}
