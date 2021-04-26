@@ -89,6 +89,10 @@ export default function PhotoPage({
   data: WithMeta<Photo>;
   collection: PrismicDocument<Collection>;
 }) {
+  if (!data || !collection) {
+    return null;
+  }
+
   const { photos } = collection.data,
     current = photos?.findIndex(({ photo }) => photo?.uid === data.uid);
 
