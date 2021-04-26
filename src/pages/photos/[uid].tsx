@@ -122,14 +122,14 @@ export default function PhotoPage({
 
           <nav css={styles.nav}>
             {current! > 0 ? (
-              <Link href={resolveDocument(photos![current! - 1].photo)}>
+              <Link href={resolveDocument(photos![current! - 1]?.photo)}>
                 <PrevIcon css={styles.navIcon} />
               </Link>
             ) : (
               <div />
             )}
             {current! < photos!.length ? (
-              <Link href={resolveDocument(photos![current! + 1].photo)}>
+              <Link href={resolveDocument(photos![current! + 1]?.photo)}>
                 <NextIcon css={styles.navIcon} />
               </Link>
             ) : (
