@@ -8,8 +8,6 @@ import { useEffect } from 'react';
 import 'react-medium-image-zoom/dist/styles.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import 'typeface-inter';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
 import { pageview } from '../lib/gtag';
 import globalStyles from '../styles';
 import { pageGrid } from '../styles/mixins';
@@ -17,8 +15,10 @@ import { pageGrid } from '../styles/mixins';
 const styles = {
   main: css`
     ${pageGrid}
-    padding-top: var(--spacing-3);
+    padding: var(--spacing-3) 0;
     overflow: hidden;
+    min-height: 100vh;
+    grid-auto-rows: min-content;
   `
 };
 
@@ -52,9 +52,7 @@ export default function App({ Component, pageProps }: AppProps & any) {
       />
 
       <main css={styles.main}>
-        <Header />
         <Component {...pageProps} />
-        <Footer />
       </main>
     </>
   );

@@ -1,13 +1,15 @@
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 import { mobile } from '../../styles/breakpoints';
-import { heading1 } from '../../styles/typesets';
+import { heading1, heading2 } from '../../styles/typesets';
 
 export type SectionHeaderProps = {
   /** Title for the header */
   title: string;
   /** Optional action content area */
   action?: ReactNode;
+  /** Whether to make it bigger */
+  large?: boolean;
 };
 
 const styles = {
@@ -22,7 +24,6 @@ const styles = {
     }
   `,
   name: css`
-    ${heading1}
     line-height: 1;
     white-space: nowrap;
   `,
@@ -38,10 +39,15 @@ const styles = {
 /**
  * Section header with optional action area
  */
-export function SectionHeader({ title, action, ...props }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  action,
+  large,
+  ...props
+}: SectionHeaderProps) {
   return (
     <div css={styles.header} {...props}>
-      <h1 css={styles.name}>{title}</h1>
+      <h1 css={[styles.name, large ? heading1 : heading2]}>{title}</h1>
       <div css={styles.action}>{action}</div>
     </div>
   );

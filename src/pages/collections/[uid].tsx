@@ -3,17 +3,17 @@ import {
   GetStaticPaths,
   GetStaticPathsContext,
   GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType
+  GetStaticPropsContext
 } from 'next';
-import { useState } from 'react';
-import { ReactComponent as CaretIcon } from '../../assets/icons/caret-left.svg';
+import { Collection } from '../../../@types/_generated/prismic';
+import { Button } from '../../components/Button';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
 import { Img } from '../../components/Img';
-import { Lightbox } from '../../components/Lightbox';
 import { Link } from '../../components/Link';
 import { Meta } from '../../components/Meta';
 import { SectionHeader } from '../../components/SectionHeader';
-import { getAll, getUid, plaintext } from '../../lib/prismic';
+import { getAll, getUid, plaintext, resolveDocument } from '../../lib/prismic';
 import { desktop, mobile, tablet } from '../../styles/breakpoints';
 
 const styles = {
@@ -26,22 +26,6 @@ const styles = {
     @media (min-width: ${desktop}) {
       grid-column: 2 / span 10;
     }
-  `,
-  backButton: css`
-    display: inine-flex;
-    align-items: center;
-    font-size: var(--scale-00);
-    padding: 3px 1em;
-    line-height: 1;
-    border-radius: var(--radius-round);
-    background: var(--color-grey-100);
-    color: var(--color-grey-700);
-  `,
-  backIcon: css`
-    fill: currentColor;
-    height: 0.625em;
-    width: 0.625em;
-    margin-right: 0.3em;
   `,
   images: css`
     columns: 1;
@@ -58,23 +42,13 @@ const styles = {
     padding-bottom: var(--grid-gap);
     /* HACK because CSS */
     margin-bottom: -4px;
-    & img {
-      cursor: zoom-in;
-    }
   `
 };
 
 /**
  * Collection page
  */
-export default function CollectionPage({
-  data
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [lightbox, setLightbox] = useState({
-    open: false,
-    selected: 0
-  });
-
+export default function CollectionPage({ data }: { data: Collection }) {
   if (!data) {
     return null;
   }
@@ -84,42 +58,41 @@ export default function CollectionPage({
       <Meta
         title={data.meta_title}
         description={data.meta_description}
-        cover={data.photos[0].photo.url}
+        cover={data.meta_cover.url}
       />
+
+      <Header />
+
       <div css={styles.wrapper}>
         <section css={styles.gallery}>
           <SectionHeader
             title={plaintext(data.name)}
+            large
             action={
-              <Link css={styles.backButton} href="/">
-                <CaretIcon css={styles.backIcon} />
+              <Button back href="/">
                 Back
-              </Link>
+              </Button>
             }
           />
           <div css={styles.images}>
-            {data.photos.map(({ photo, photo_title }: any, i: number) => (
-              <div css={styles.image}>
+            {data.photos?.map(({ photo }: any) => (
+              <Link
+                href={resolveDocument(photo)}
+                css={styles.image}
+                key={photo.uid}
+              >
                 <Img
-                  onClick={() => setLightbox({ open: true, selected: i })}
-                  prismic={photo}
-                  alt={photo_title}
+                  prismic={photo.data.photo}
+                  alt={photo.data.title}
                   sizes={`(max-width: ${mobile}) 100vw, (max-width: ${tablet}) 50vw, 33vw`}
                 />
-              </div>
+              </Link>
             ))}
           </div>
         </section>
       </div>
-      <Lightbox
-        open={lightbox.open}
-        onClose={() => setLightbox({ ...lightbox, open: false })}
-        selected={lightbox.selected}
-        images={data.photos.map(({ photo, photo_title }: any) => ({
-          image: photo,
-          title: photo_title
-        }))}
-      />
+
+      <Footer />
     </>
   );
 }
@@ -147,7 +120,8 @@ export const getStaticProps: GetStaticProps = async (
   const data = await getUid(
     'collection',
     context.params?.uid as string,
-    context
+    context,
+    { fetchLinks: ['photo.photo', 'photo.title'] }
   );
 
   return !!data

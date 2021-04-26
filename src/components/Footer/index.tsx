@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 const styles = {
   footer: css`
-    margin: var(--spacing-6) 0 var(--spacing-3);
+    margin-top: var(--spacing-6);
   `,
   legal: css`
     font-size: var(--scale-00);

@@ -1,7 +1,7 @@
 customFetch: 'codegen-prismic-fetch'
 schema: https://madeleineostoja.cdn.prismic.io/graphql
 generates:
-  ./@types/_generated/prismic.ts:
+  ./@types/_generated/prismic.d.ts:
     plugins:
       - typescript
       - typescript-operations

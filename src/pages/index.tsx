@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType
-} from 'next';
-import { Home } from '../../.graphql/types';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { WithMeta } from '../../@types/prismic';
+import { Home, Photo } from '../../@types/_generated/prismic';
 import { Collection } from '../components/Collection';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
 import { Meta } from '../components/Meta';
 import { get, plaintext, resolveDocument } from '../lib/prismic';
 import { mobile } from '../styles/breakpoints';
@@ -37,37 +36,25 @@ export default function HomePage({ data }: { data: Home }) {
         cover={data.meta_cover.url}
       />
 
-      {/* <p
-        css={css`
-          font-size: var(--scale-1);
-          max-width: 36rem;
-          line-height: 1.6;
-          color: var(--color-grey-700);
-          margin-bottom: var(--spacing-5);
-        `}
-      >
-        Madeleine Ostoja is a film photographer based in Wellington, New
-        Zealand. With a focus on the urban landscape, she captures people and
-        how they relate to their environments.
-      </p> */}
+      <Header />
 
       <div css={styles.collections}>
-        {data.collections.map(({ collection }: any) => {
+        {data.collections?.map(({ collection }: any) => {
           return (
             <Collection
               css={styles.collection}
               name={plaintext(collection.data.name)}
-              images={collection.data.photos.map(
-                ({ photo, photo_title }: any) => ({
-                  alt: photo_title,
-                  prismic: photo
-                })
+              photos={collection.data.photos?.map(
+                ({ photo }: any) => photo.data
               )}
               href={resolveDocument(collection)}
+              key={collection.uid}
             />
           );
         })}
       </div>
+
+      <Footer />
     </>
   );
 }
@@ -79,7 +66,13 @@ export const getStaticProps: GetStaticProps = async (
   return {
     props: {
       data: await get('home', context, {
-        fetchLinks: ['collection.name', 'collection.photos']
+        fetchLinks: [
+          'collection.name',
+          'collection.photos',
+          'photo.photo',
+          'photo.title',
+          'photo.uid'
+        ]
       }),
       preview: context.preview || null
     }

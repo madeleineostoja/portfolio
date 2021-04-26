@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+import { WithMeta } from '../../../@types/prismic';
+import { Photo } from '../../../@types/_generated/prismic';
 import { ReactComponent as ArrowIcon } from '../../assets/icons/arrow.svg';
 import { subPageGrid } from '../../styles/mixins';
-import { Img, ImgProps } from '../Img';
+import { Img } from '../Img';
 import { Link } from '../Link';
 import { SectionHeader } from '../SectionHeader';
 
@@ -11,7 +14,7 @@ export type CollectionProps = {
   /** Link to collection */
   href: string;
   /** No description */
-  images: ImgProps[];
+  photos: WithMeta<Photo>[];
 };
 
 const styles = {
@@ -27,22 +30,25 @@ const styles = {
     margin-left: 0.5em;
     transform: translateY(5%);
   `,
-  images: css`
+  photos: css`
     grid-column: 2 / -1;
     display: flex;
     height: 17rem;
   `,
-  image: css`
+  photo: css`
     height: 100%;
     width: auto !important;
     margin-right: var(--grid-gap);
+    cursor: pointer;
   `
 };
 
 /**
  * Preview of a collection
  */
-export function Collection({ name, href, images, ...props }: CollectionProps) {
+export function Collection({ name, href, photos, ...props }: CollectionProps) {
+  const router = useRouter();
+
   return (
     <section css={subPageGrid} {...props}>
       <SectionHeader
@@ -54,9 +60,16 @@ export function Collection({ name, href, images, ...props }: CollectionProps) {
           </Link>
         }
       />
-      <div css={styles.images}>
-        {images.map((data: ImgProps) => (
-          <Img sizes="450px" css={styles.image} {...data} />
+      <div css={styles.photos}>
+        {photos.map(({ photo, title, uid }) => (
+          <Img
+            onClick={() => router.push(`/photo/${uid}`)}
+            sizes="450px"
+            css={styles.photo}
+            prismic={photo}
+            alt={title}
+            key={uid}
+          />
         ))}
       </div>
     </section>

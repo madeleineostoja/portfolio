@@ -1,24 +1,8 @@
-// We don't use GraphQL & Apollo because of workarounds needed for slice introspection
-// See https://github.com/prismicio/apollo-link-prismic/issues/10
 import { GetStaticPropsContext } from 'next';
 import { RichText } from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import { ResolvedApiOptions } from 'prismic-javascript/types/ResolvedApi';
 import { PRISMIC_API } from './consts';
-
-/** Convert Prismic RichText to HTML string */
-export function richtext(richtext: object, inline?: boolean) {
-  const result = richtext ? RichText.asHtml(richtext, resolveLink) : '';
-
-  return inline
-    ? result.replace(/^<[^>]+>|<\/[^>]+>$|<[^/>][^>]*><\/[^>]+>/g, '')
-    : result;
-}
-
-/** Convert Prismic RichText to plaintext string */
-export function plaintext(richtext: object) {
-  return richtext ? RichText.asText(richtext) : '';
-}
 
 async function getPrismic(
   context?: GetStaticPropsContext,
@@ -62,7 +46,6 @@ export async function get(type: string, ...args: any) {
   return { ...data, ...rest };
 }
 
-/** get all of a type shortcut */
 export async function getAll(type: string, ...args: any) {
   const { results } = await query('document.type', type, ...args);
   return results;
@@ -81,20 +64,18 @@ export async function getUid(type: string, docUid: string, ...args: any) {
   return { ...data, ...rest };
 }
 
-/** Prismic link resolver */
-type PrismicDocLink = { type: string; uid: string };
-export function resolveDocument(doc: PrismicDocLink) {
-  if (!doc) {
-    return '';
-  }
+export function resolveDocument(doc: any) {
+  const { type, uid } = doc || {};
 
-  switch (doc.type) {
+  switch (type) {
     case 'home':
       return '/';
+    case 'photo':
+      return `/photos/${uid}`;
     case 'collection':
-      return `/collections/${doc.uid}`;
+      return `/collections/${uid}`;
     default:
-      return `/${doc.uid}`;
+      return `/${uid}`;
   }
 }
 
@@ -105,5 +86,19 @@ export function resolveLink(link: { link_type?: string; url?: string }) {
 
   return link.link_type && link.link_type !== 'Document'
     ? link.url || ''
-    : resolveDocument(link as PrismicDocLink);
+    : resolveDocument(link);
+}
+
+/** Convert Prismic RichText to HTML string */
+export function richtext(richtext: object, inline?: boolean) {
+  const result = richtext ? RichText.asHtml(richtext, resolveLink) : '';
+
+  return inline
+    ? result.replace(/^<[^>]+>|<\/[^>]+>$|<[^/>][^>]*><\/[^>]+>/g, '')
+    : result;
+}
+
+/** Convert Prismic RichText to plaintext string */
+export function plaintext(richtext: object) {
+  return richtext ? RichText.asText(richtext) : '';
 }

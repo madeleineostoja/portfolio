@@ -7,7 +7,7 @@ import { ReactComponent as InstagramIcon } from '../../assets/icons/instagram.sv
 import { ReactComponent as TwitterIcon } from '../../assets/icons/twitter.svg';
 import { mobile, tablet } from '../../styles/breakpoints';
 import { pageGrid } from '../../styles/mixins';
-import { heading1 } from '../../styles/typesets';
+import { heading2 } from '../../styles/typesets';
 import { Link } from '../Link';
 
 const styles = {
@@ -103,7 +103,7 @@ export function Header(props: any) {
         <div css={styles.mobMenu}>
           <nav>
             <Link
-              css={heading1}
+              css={heading2}
               onClick={closeMenu}
               href="https://madi.darkroom.tech"
             >

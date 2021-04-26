@@ -11,6 +11,12 @@ export const pageGrid = css`
   }
 `;
 
+/** Content grid */
+export const contentGrid = css`
+  display: grid;
+  grid-template-columns: var(--grid-content);
+`;
+
 /** Subgrid with page container inheritence */
 export const subPageGrid = css`
   ${subgrid}
