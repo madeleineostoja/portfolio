@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetStaticProps } from 'next';
 import { WithMeta } from '../../@types/prismic';
 import { Home, Photo } from '../../@types/_generated/prismic';
 import { Collection } from '../components/Collection';
@@ -60,9 +60,7 @@ export default function HomePage({ data }: { data: Home }) {
 }
 
 /** Page data */
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       data: await get('home', context, {

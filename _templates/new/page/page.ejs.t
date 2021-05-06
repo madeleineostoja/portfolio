@@ -3,10 +3,10 @@ to: src/pages/<%= name %>.tsx
 ---
 import { css } from '@emotion/react';
 import { Meta } from '../components/Meta';
-import { Footer } from '../../components/Footer';
-import { Header } from '../../components/Header';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
 <% if (staticProps) { -%>
-import { GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetStaticProps } from 'next';
 <% } -%>
 <% if (prismic) { -%>
 import { get } from '../lib/prismic';
@@ -33,7 +33,7 @@ export default function <%= h.changeCase.pascal(name) %>Page({
 
 <% if (staticProps) { -%>
 /** Page data */
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       data: <%- prismic ? `await get('${name}', context)` : '{}' %><% if (prismic) { %>,

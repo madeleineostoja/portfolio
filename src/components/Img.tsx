@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+import ImgixJS from '@imgix/js-core';
 import 'lazysizes';
 import 'lazysizes/plugins/blur-up/ls.blur-up';
 import { HTMLProps, LegacyRef } from 'react';
 import Imgix from 'react-imgix';
+import { PRISMIC_IMG_HOST } from '../lib/consts';
 
 export type PrismicImg = {
   url: string;
@@ -14,6 +16,16 @@ export type ImgProps = Partial<Imgix['props']> &
     prismic: PrismicImg;
     ref?: LegacyRef<Imgix> | undefined;
   };
+
+export function generateSrcSet(src: string) {
+  const img = src.split(`https://${PRISMIC_IMG_HOST}/`)[1].split('?')[0],
+    client = new ImgixJS({
+      domain: PRISMIC_IMG_HOST,
+      includeLibraryParam: false
+    });
+
+  return client.buildSrcSet(img).replaceAll('%2B', '+');
+}
 
 /**
  * Responsive, lazy-loaded image component

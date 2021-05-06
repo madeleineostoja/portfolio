@@ -1,8 +1,9 @@
 import { GetStaticPropsContext } from 'next';
-import { RichText } from 'prismic-dom';
+import { Link as PrismicLink, RichText } from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import { ResolvedApiOptions } from 'prismic-javascript/types/ResolvedApi';
 import { PRISMIC_API } from './consts';
+import html from './richtext';
 
 async function getPrismic(
   context?: GetStaticPropsContext,
@@ -91,7 +92,9 @@ export function resolveLink(link: { link_type?: string; url?: string }) {
 
 /** Convert Prismic RichText to HTML string */
 export function richtext(richtext: object, inline?: boolean) {
-  const result = richtext ? RichText.asHtml(richtext, resolveLink) : '';
+  const result = richtext
+    ? RichText.asHtml(richtext, resolveLink, html as any)
+    : '';
 
   return inline
     ? result.replace(/^<[^>]+>|<\/[^>]+>$|<[^/>][^>]*><\/[^>]+>/g, '')

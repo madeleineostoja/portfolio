@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-  GetStaticPaths,
-  GetStaticPathsContext,
-  GetStaticProps,
-  GetStaticPropsContext
-} from 'next';
+import { GetStaticPaths, GetStaticPathsContext, GetStaticProps } from 'next';
 import { PrismicDocument, WithMeta } from '../../../@types/prismic';
 import { Collection, Photo } from '../../../@types/_generated/prismic';
 import { ReactComponent as PrevIcon } from '../../assets/icons/caret-left.svg';
@@ -164,9 +159,7 @@ export const getStaticPaths: GetStaticPaths = async (
 };
 
 /** Page data */
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const data = await getUid('photo', context.params?.uid as string, context),
     collections = await getAll('collection', context),
     collection = collections.find(({ data: doc }: any) => {

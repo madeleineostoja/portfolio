@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-  GetStaticPaths,
-  GetStaticPathsContext,
-  GetStaticProps,
-  GetStaticPropsContext
-} from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { Collection } from '../../../@types/_generated/prismic';
 import { Button } from '../../components/Button';
 import { Footer } from '../../components/Footer';
@@ -98,9 +93,7 @@ export default function CollectionPage({ data }: { data: Collection }) {
 }
 
 /** Page generation */
-export const getStaticPaths: GetStaticPaths = async (
-  context: GetStaticPathsContext
-) => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
   const documents = await getAll('collection', context);
 
   return {
@@ -114,9 +107,7 @@ export const getStaticPaths: GetStaticPaths = async (
 };
 
 /** Page data */
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const data = await getUid(
     'collection',
     context.params?.uid as string,

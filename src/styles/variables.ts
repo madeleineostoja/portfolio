@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { tablet } from './breakpoints';
 
 /**
  * Design system
@@ -26,8 +27,10 @@ export default css`
     --grid-content: repeat(12, 1fr);
 
     /* Layout — Constants */
-    --grid-gap: 0.75rem;
+    --grid-gap: 1rem;
 
-    /* UI */
+    @media (min-width: ${tablet}) {
+      --grid-gap: 0.5rem;
+    }
   }
 `;

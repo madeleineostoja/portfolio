@@ -16,8 +16,10 @@ const styles = {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-6);
+    font-size: var(--scale-0);
+    line-height: 1;
     @media (min-width: ${tablet}) {
-      margin-bottom: var(--spacing-8);
+      margin-bottom: var(--spacing-7);
     }
   `,
   logo: css`
@@ -90,6 +92,7 @@ export function Header(props: any) {
           <Link href="mailto:madi@madeleineostoja.com">
             <MailIcon css={styles.navIcon} />
           </Link>
+          <Link href="/about">About</Link>
           <Link href="https://madi.darkroom.tech">Prints</Link>
         </nav>
         <HamburgerIcon

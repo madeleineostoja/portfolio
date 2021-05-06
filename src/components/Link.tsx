@@ -1,6 +1,8 @@
 import NextLink from 'next/link';
 import { HTMLProps } from 'react';
 
+export type LinkProps = typeof NextLink['props'] & HTMLProps<HTMLAnchorElement>;
+
 /**
  * Link wrapper
  */
@@ -10,7 +12,7 @@ export function Link({
   shallow,
   children,
   ...props
-}: typeof NextLink['props'] & HTMLProps<HTMLAnchorElement>) {
+}: LinkProps) {
   const isExternal = /^https?:\/\//i.test(href);
 
   return (

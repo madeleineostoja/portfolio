@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { normalize } from 'satchel-css';
+import { paragraph } from './typesets';
 import variables from './variables';
 
 /**
@@ -21,9 +22,9 @@ export default [
     }
 
     body {
+      ${paragraph}
       font-family: var(--font-sans);
       font-weight: var(--font-weight-default);
-      line-height: var(--leading-default);
       position: relative;
     }
 
