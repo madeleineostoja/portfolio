@@ -24,7 +24,7 @@ export function generateSrcSet(src: string) {
       includeLibraryParam: false
     });
 
-  return client.buildSrcSet(img).replaceAll('%2B', '+');
+  return client.buildSrcSet(img).replace(/%2B/g, '+');
 }
 
 /**
