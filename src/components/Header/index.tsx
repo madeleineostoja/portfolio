@@ -105,6 +105,13 @@ export function Header(props: any) {
       <Overlay open={mobNavOpen} closeOnEsc={true} onClose={closeMenu}>
         <div css={styles.mobMenu}>
           <nav>
+          <Link
+              css={heading2}
+              onClick={closeMenu}
+              href="/about"
+            >
+              About
+            </Link>
             <Link
               css={heading2}
               onClick={closeMenu}
