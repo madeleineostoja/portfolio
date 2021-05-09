@@ -86,7 +86,7 @@ export function Header(props: any) {
           <Link href="https://twitter.com/madeleineostoja">
             <TwitterIcon css={styles.navIcon} />
           </Link>
-          <Link href="https://instagram.com/filmic__">
+          <Link href="https://instagram.com/madeleineostoja">
             <InstagramIcon css={styles.navIcon} />
           </Link>
           <Link href="mailto:madi@madeleineostoja.com">
@@ -105,11 +105,7 @@ export function Header(props: any) {
       <Overlay open={mobNavOpen} closeOnEsc={true} onClose={closeMenu}>
         <div css={styles.mobMenu}>
           <nav>
-          <Link
-              css={heading2}
-              onClick={closeMenu}
-              href="/about"
-            >
+            <Link css={heading2} onClick={closeMenu} href="/about">
               About
             </Link>
             <Link
@@ -127,7 +123,10 @@ export function Header(props: any) {
             >
               <TwitterIcon css={styles.navIcon} />
             </Link>
-            <Link onClick={closeMenu} href="https://instagram.com/filmic__">
+            <Link
+              onClick={closeMenu}
+              href="https://instagram.com/madeleineostoja"
+            >
               <InstagramIcon css={styles.navIcon} />
             </Link>
             <Link onClick={closeMenu} href="mailto:madi@madeleineostoja.com">
