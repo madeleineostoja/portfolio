@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import Gallery from 'react-photo-gallery';
 import { flexGrid } from 'satchel-css';
 import { useBreakpoint } from '../../lib/hooks';
@@ -26,20 +26,31 @@ export function Images({ images, ...props }: ImagesProps) {
   const isDesktop = useBreakpoint(`(min-width: ${tablet})`);
 
   return (
-    <div css={styles.images}>
-      <Gallery
-        margin={isDesktop ? 4 : 8}
-        photos={
-          images.map(({ dimensions, url }) => ({
-            src: url,
-            srcset: generateSrcSet(url),
-            sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
-            height: dimensions?.height,
-            width: dimensions?.width
-          })) as any
-        }
-        {...props}
+    <>
+      <Global
+        styles={css`
+          .react-photo-gallery--gallery > div {
+            align-items: flex-start;
+          }
+        `}
       />
-    </div>
+      <div css={styles.images}>
+        <Gallery
+          margin={isDesktop ? 4 : 8}
+          photos={
+            images.map(({ dimensions, url }) => ({
+              src: url,
+              srcset: generateSrcSet(url),
+              sizes: [
+                '(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'
+              ],
+              height: dimensions?.height,
+              width: dimensions?.width
+            })) as any
+          }
+          {...props}
+        />
+      </div>
+    </>
   );
 }

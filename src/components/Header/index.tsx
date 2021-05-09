@@ -59,6 +59,11 @@ const styles = {
     align: space-between;
     background: white;
   `,
+  mobNavLink: css`
+    ${heading2}
+    display: block;
+    margin-bottom: 1em;
+  `,
   mobSocials: css`
     display: flex;
     align-items: center;
@@ -105,11 +110,11 @@ export function Header(props: any) {
       <Overlay open={mobNavOpen} closeOnEsc={true} onClose={closeMenu}>
         <div css={styles.mobMenu}>
           <nav>
-            <Link css={heading2} onClick={closeMenu} href="/about">
+            <Link css={styles.mobNavLink} onClick={closeMenu} href="/about">
               About
             </Link>
             <Link
-              css={heading2}
+              css={styles.mobNavLink}
               onClick={closeMenu}
               href="https://madi.darkroom.tech"
             >
