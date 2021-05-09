@@ -7,6 +7,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
   `,
   icon: css`
     fill: currentColor;

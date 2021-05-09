@@ -16,6 +16,7 @@ const styles = {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-6);
+    font-weight: var(--font-weight-semibold);
     font-size: var(--scale-0);
     line-height: 1;
     @media (min-width: ${tablet}) {

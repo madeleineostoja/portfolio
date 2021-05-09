@@ -14,12 +14,14 @@ export const paragraph = css`
 
 export const heading1 = css`
   font-size: var(--scale-4);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   letter-spacing: -0.0195em;
 `;
 
 export const heading2 = css`
   font-size: var(--scale-3);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   letter-spacing: -0.0195em;
 `;

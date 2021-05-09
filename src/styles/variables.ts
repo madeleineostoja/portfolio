@@ -11,7 +11,7 @@ export default css`
     /* Typography */
     --font-sans: 'Inter', sans-serif;
     --font-weight-bold: 600;
-    --font-weight-default: 500;
+    --font-weight-semibold: 500;
 
     /* Colours */
     --color-text: var(--color-black);

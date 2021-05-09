@@ -22,6 +22,7 @@ const styles = {
     border-radius: var(--radius-round);
     background: var(--color-grey-100);
     color: var(--color-grey-700);
+    font-weight: var(--font-weight-semibold);
   `,
   icon: css`
     fill: currentColor;

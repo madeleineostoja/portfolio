@@ -59,6 +59,7 @@ const styles = {
   `,
   description: css`
     color: var(--color-text-secondary);
+    font-weight: var(--font-weight-semibold);
   `,
   nav: css`
     display: flex;
