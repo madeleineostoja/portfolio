@@ -10,7 +10,9 @@
 
 <script>
   import type { Load } from '@sveltejs/kit';
-  import imgix, { placeholder } from 'svelte-imgix';
+  import { resolveDocument } from '../../lib/resolve';
+  import { plaintext } from '../../lib/richtext';
+  import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { Collection } from '../../../@types/_generated/prismic';
   import link from '../../actions/link';
@@ -18,7 +20,7 @@
   import Footer from '../../components/Footer/Footer.svelte';
   import Header from '../../components/Header/Header.svelte';
   import SectionHeader from '../../components/SectionHeader/SectionHeader.svelte';
-  import { getUid, plaintext, resolveDocument } from '../../lib/prismic';
+  import { getUid, prismicImg } from '../../lib/prismic';
   import { customMedia } from '../../styles/breakpoints.json';
 
   export let data: Collection;
@@ -72,8 +74,7 @@
         <a use:link href={resolveDocument(photo)} class="image">
           <img
             use:imgix={photo.data.photo.url}
-            src={placeholder(photo.data.photo.url)}
-            {...photo.data.photo.dimensions}
+            {...prismicImg(photo.data.photo)}
             alt={photo.data.title}
             sizes={`${customMedia['--mobile']} 50vw, ${customMedia['--tablet']} 33vw, 100vw`}
           />

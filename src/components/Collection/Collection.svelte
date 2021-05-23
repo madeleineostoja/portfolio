@@ -1,5 +1,6 @@
 <script>
   import { goto, prefetch } from '$app/navigation';
+  import { prismicImg } from '../../lib/prismic';
   import imgix, { placeholder } from 'svelte-imgix';
   import type { WithMeta } from '../../../@types/prismic';
   import type { Photo } from '../../../@types/_generated/prismic';
@@ -38,9 +39,7 @@
       <img
         class="photo"
         use:imgix={photo.url}
-        src={placeholder(photo.url)}
-        width={photo.dimensions.width}
-        height={photo.dimensions.height}
+        {...prismicImg(photo)}
         on:click={() => goto(`/photos/${uid}`)}
         on:mouseenter={() => prefetch(`/photos/${uid}`)}
         on:touchstart={() => prefetch(`/photos/${uid}`)}

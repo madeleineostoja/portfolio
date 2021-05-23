@@ -1,6 +1,7 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import imgix, { placeholder } from 'svelte-imgix';
+  import { resolveDocument } from '../../lib/resolve';
+  import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { PrismicDocument, WithMeta } from '../../../@types/prismic';
   import type { Collection, Photo } from '../../../@types/_generated/prismic';
@@ -8,7 +9,7 @@
   import PrevIcon from '../../assets/icons/caret-left.svelte';
   import NextIcon from '../../assets/icons/caret-right.svelte';
   import Button from '../../components/Button/Button.svelte';
-  import { getAll, getUid, resolveDocument } from '../../lib/prismic';
+  import { getAll, getUid, prismicImg } from '../../lib/prismic';
 
   export const load: Load = async ({ page }) => {
     const data = await getUid('photo', page.params.uid),
@@ -121,9 +122,8 @@
     <img
       class="photo"
       use:imgix={data.photo.url}
-      src={placeholder(data.photo.url)}
-      alt={data.photo.alt}
-      {...data.photo.dimensions}
+      {...prismicImg(data.photo)}
+      alt={data.title}
     />
 
     <nav class="nav">

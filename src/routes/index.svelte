@@ -18,13 +18,15 @@
 
 <script>
   import type { Load } from '@sveltejs/kit';
+  import { resolveDocument } from '../lib/resolve';
+  import { plaintext } from '../lib/richtext';
   import Meta from 'svelte-meta';
   import type { WithMeta } from '../../@types/prismic';
   import type { Home } from '../../@types/_generated/prismic';
   import Collection from '../components/Collection/Collection.svelte';
   import Footer from '../components/Footer/Footer.svelte';
   import Header from '../components/Header/Header.svelte';
-  import { get, plaintext, resolveDocument } from '../lib/prismic';
+  import { get } from '../lib/prismic';
 
   export let data: WithMeta<Home>;
 </script>

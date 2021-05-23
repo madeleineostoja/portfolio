@@ -1,6 +1,6 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import { customMedia } from '../styles/breakpoints.json';
+  import { plaintext, richtext } from '../lib/richtext';
   import imgix, { placeholder } from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { About } from '../../@types/_generated/prismic';
@@ -9,7 +9,8 @@
   import Header from '../components/Header/Header.svelte';
   import ImageGrid from '../components/ImageGrid/ImageGrid.svelte';
   import SectionHeader from '../components/SectionHeader/SectionHeader.svelte';
-  import { get, plaintext, richtext } from '../lib/prismic';
+  import { get } from '../lib/prismic';
+  import { customMedia } from '../styles/breakpoints.json';
 
   export const load: Load = async () => {
     return {
@@ -64,13 +65,12 @@
 <section class="contentGrid">
   <aside class="sidebar">
     <img
+      class="sidebar-image"
       use:imgix={data.image.url}
       src={placeholder(data.image.url)}
-      width={data.image.dimensions.width}
-      height={data.image.dimensions.height}
-      class="sidebar-image"
       alt="Photo of Madeleine Ostoja"
       sizes={`${customMedia['--tablet']} 33vw, 100vw`}
+      {...data.image.dimensions}
     />
   </aside>
   <div class="article">

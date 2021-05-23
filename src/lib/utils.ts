@@ -1,7 +1,5 @@
 /**
  * Resole relative URLs against a source
- * @param link URL to resolve
- * @param source Source URL to resolve against
  */
 export function resolveUrl(link: string, source: string) {
   if (!link) {
@@ -15,7 +13,6 @@ export function resolveUrl(link: string, source: string) {
 
 /**
  * Helper to update CSS variables
- * @param properties Object of CSS properties
  */
 export function setProperties(properties: any) {
   Object.keys(properties).forEach((property: string) =>

@@ -1,11 +1,12 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
+  import { plaintext, richtext } from '../../lib/richtext';
   import Meta from 'svelte-meta';
   import type { Post } from '../../../@types/_generated/prismic';
   import Footer from '../../components/Footer/Footer.svelte';
   import Header from '../../components/Header/Header.svelte';
   import ImageGrid from '../../components/ImageGrid/ImageGrid.svelte';
-  import { getUid, plaintext, richtext } from '../../lib/prismic';
+  import { getUid } from '../../lib/prismic';
 
   export const load: Load = async ({ page }) => ({
     props: {

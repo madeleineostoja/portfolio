@@ -1,27 +1,14 @@
 // We don't use GraphQL & Apollo because of workarounds needed for slice introspection
 // See https://github.com/prismicio/apollo-link-prismic/issues/10
-import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
 import type { ResolvedApiOptions } from 'prismic-javascript/types/ResolvedApi';
+import { placeholder } from 'svelte-imgix';
+import type { PrismicImg } from '../../@types/prismic';
 import { PRISMIC_API } from './consts';
-import html from './richtext';
 
-/** Convert Prismic RichText to HTML string */
-export function richtext(richtext: object, inline?: boolean) {
-  const result = richtext
-    ? PrismicDOM.RichText.asHtml(richtext, resolveLink, html as any)
-    : '';
-
-  return inline
-    ? result.replace(/^<[^>]+>|<\/[^>]+>$|<[^/>][^>]*><\/[^>]+>/g, '')
-    : result;
-}
-
-/** Convert Prismic RichText to plaintext string */
-export function plaintext(richtext: object) {
-  return richtext ? PrismicDOM.RichText.asText(richtext) : '';
-}
-
+/**
+ * Get Prismic API
+ */
 async function getPrismic(options?: ResolvedApiOptions) {
   const api = await Prismic.getApi(PRISMIC_API);
 
@@ -35,7 +22,9 @@ async function getPrismic(options?: ResolvedApiOptions) {
   };
 }
 
-/** Prismic API helper with autmoatic preview resolving */
+/**
+ * Prismic Query helper
+ */
 export async function query(
   field: string,
   query: string[] | string,
@@ -46,7 +35,9 @@ export async function query(
   return await api.query(Prismic.Predicates.at(field, query), options);
 }
 
-/** Get single document shortcut */
+/**
+ * Get single document shortcut
+ */
 export async function get(type: string, ...args: any) {
   const { api, options } = await getPrismic(...args),
     result = await api.getSingle(type, options);
@@ -56,16 +47,20 @@ export async function get(type: string, ...args: any) {
   }
 
   const { data, ...rest } = result;
-
   return { ...data, ...rest };
 }
 
-/** get all of a type shortcut */
+/**
+ * Get all of a type shortcut
+ */
 export async function getAll(type: string, ...args: any) {
   const { results } = await query('document.type', type, ...args);
   return results;
 }
 
+/**
+ * Get by UID shortcut
+ */
 export async function getUid(type: string, docUid: string, ...args: any) {
   const { api, options } = await getPrismic(...args),
     result = await api.getByUID(type, docUid, options);
@@ -75,34 +70,16 @@ export async function getUid(type: string, docUid: string, ...args: any) {
   }
 
   const { data, ...rest } = result;
-
   return { ...data, ...rest };
 }
 
-/** Prismic link resolver */
-export function resolveDocument(doc: any) {
-  if (!doc) {
-    return '';
-  }
-
-  switch (doc.type) {
-    case 'home':
-      return '/';
-    case 'collection':
-      return `/collections/${doc.uid}`;
-    case 'photo':
-      return `/photos/${doc.uid}`;
-    default:
-      return `/${doc.uid}`;
-  }
-}
-
-export function resolveLink(link: { link_type?: string; url?: string }) {
-  if (!link) {
-    return '';
-  }
-
-  return link.link_type && link.link_type !== 'Document'
-    ? link.url || ''
-    : resolveDocument(link);
+/**
+ * Prismic image attribute shorthand
+ */
+export function prismicImg(img: PrismicImg) {
+  return {
+    src: placeholder(img.url),
+    alt: img.alt,
+    ...img.dimensions
+  };
 }
