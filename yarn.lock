@@ -11168,10 +11168,10 @@ svelte-hmr@^0.14.2:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.4.tgz#b7ef2bfeef23916e0e912828c50645ca572ac355"
   integrity sha512-kItFF7vqzStckSigoFmMnxJpTOdB9TWnQAW6Js+yAB4277tLbJIIE5KBlGHNmJNpA7MguqidsPB27Uw5UzQPCA==
 
-svelte-imgix@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/svelte-imgix/-/svelte-imgix-2.3.0.tgz#c98a35dd7c89f516c166c7295a65614c6d6f9b4e"
-  integrity sha512-CpZb/uGQhBCajOb5zucTNQJ3X6Ne5O34YEbCoqegg6M9GHNoGMO6ToK2fgSG0FV7cED59H0g5Jos+xSu1eAARQ==
+svelte-imgix@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/svelte-imgix/-/svelte-imgix-2.4.0.tgz#d452c5aacfca1a7ce1042f23979098eee5bec72a"
+  integrity sha512-9Qtn3aXL/h0n3ADh5QrNw2ENouw3vbHKOqCWd31pKpHDvPZEzGIomQBRrRgnm39jJ6Z/syzgQbFLxHfDCJs8BA==
   dependencies:
     query-string "^7.0.0"
 

@@ -20,8 +20,6 @@
     position: relative;
     min-height: 100vh;
     padding: var(--spacing-3) 0;
-    overflow: hidden;
-    /* grid-template-rows: auto 1fr auto; */
   }
 
   .content {

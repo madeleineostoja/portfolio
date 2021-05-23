@@ -30,9 +30,10 @@
   export let data: WithMeta<Photo>;
   export let collection: PrismicDocument<Collection>;
 
-  const { photos } = collection.data as any,
-    current =
-      photos?.findIndex(({ photo }: any) => photo?.uid === data.uid) || 0;
+  const { photos } = collection.data as any;
+
+  $: current =
+    photos?.findIndex(({ photo }: any) => photo?.uid === data.uid) || 0;
 </script>
 
 <style>
