@@ -19,7 +19,13 @@
   export let data: Post;
 </script>
 
-<style></style>
+<style>
+  .content {
+    & :global(a) {
+      color: var(--color-primary);
+    }
+  }
+</style>
 
 <Meta
   title={`${plaintext(data.title)} — Blog`}
@@ -34,10 +40,11 @@
 <article>
   {#each data.body as { primary, items, slice_type }}
     {#if slice_type === 'content'}
-      <div>{@html richtext(primary.content)}</div>
+      <div class="content">{@html richtext(primary.content)}</div>
     {:else if slice_type === 'images'}
       <ImageGrid images={items.map(({ image }) => image)} />
     {/if}
   {/each}
 </article>
+
 <Footer />

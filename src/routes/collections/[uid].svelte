@@ -51,8 +51,9 @@
   }
 
   .image {
-    display: block;
+    display: inline-block;
     padding-bottom: var(--grid-gap);
+    vertical-align: bottom;
   }
 </style>
 
