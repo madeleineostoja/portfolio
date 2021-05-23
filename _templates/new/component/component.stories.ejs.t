@@ -1,13 +1,16 @@
 ---
-to: src/components/<%= name %>/<%= name %>.stories.tsx
+to: src/components/<%= name %>/<%= name %>.stories.svelte
 ---
-import { <%= name %><% if (props) { %>, <%= name %>Props<% } %> } from '.';
+<script>
+  import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+  import <%= name %> from './<%= name %>.svelte';
+</script>
 
-export default {
-  title: 'Components/<%= name %>',
-  component: <%= name %>
-};
+<Meta title="<%= name %>" component={<%= name %>}/>
 
-export const Default = (<% if (props) { %>props: <%= name %>Props<% } %>) => (
-  <<%= name %><% if (props) { %> {...props}<% } %> />
-);
+<Template let:args>
+  <<%= name %> {...args}/>
+</Template>
+
+<Story name="Default" />
+

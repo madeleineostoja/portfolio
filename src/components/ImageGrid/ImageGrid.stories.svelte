@@ -1,0 +1,12 @@
+<script>
+  import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+  import ImageGrid from './ImageGrid.svelte';
+</script>
+
+<Meta title="ImageGrid" component={ImageGrid} />
+
+<Template let:args>
+  <ImageGrid {...args} />
+</Template>
+
+<Story name="Default" />

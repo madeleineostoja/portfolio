@@ -1,0 +1,52 @@
+/**
+ * Typesets
+ */
+.typeset-paragraph {
+  line-height: var(--leading-large);
+  @media (--mobile) {
+    font-size: var(--scale-1);
+    letter-spacing: -0.0139em;
+  }
+}
+
+.typeset-h1,
+.typeset-h2 {
+  display: block;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  letter-spacing: -0.0195em;
+}
+
+.typeset-h1 {
+  font-size: var(--scale-4);
+}
+
+.typeset-h2 {
+  font-size: var(--scale-3);
+}
+
+.typeset-ui {
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+}
+
+/**
+ * Grids
+ */
+.pageGrid {
+  display: grid;
+  position: relative;
+  grid-template-columns: var(--grid-page);
+  & > * {
+    grid-column: 2 / 3;
+  }
+}
+
+.fullbleed {
+  grid-column: 1 / -1 !important;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: var(--grid-content);
+}

@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
-    /* Basic Options */
-    "target": "esnext",
+    // Modules
+    "moduleResolution": "node",
     "module": "esnext",
-    "jsx": "preserve",
+    "target": "es2019",
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Type checking
+    "strict": true,
     "allowJs": true,
+    "lib": ["dom", "esnext", "webworker"],
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
     "skipLibCheck": true,
 
-    /* Type-Checking Options */
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* Module resoltion */
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "noEmit": true
+    // Misc
+    "sourceMap": true,
+    "baseUrl": "."
   },
-  "include": ["src", "@types", "./.storybook/**/*"],
-  "exclude": []
+  "include": ["src", "@types", ".storybook", "components"]
 }

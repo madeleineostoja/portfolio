@@ -1,3 +1,3 @@
 # Madeleine Ostoja
 
-Portfolio of film photographer Madeleine Ostoja
+This is the portfolio of film photographer Madeleine Ostoja

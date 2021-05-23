@@ -1,32 +1,16 @@
 ---
-to: src/components/<%= name %>/index.tsx
+to: src/components/<%= name %>/<%= name %>.svelte
 ---
-import { css } from '@emotion/react';
-<% if (locals.props) { -%>
-
-export type <%= name %>Props = {
-<% props.forEach(prop => { -%>
-  /** <%= prop.description %> */
-  <%= prop.name %>: <%= prop.type %>;
+<!--
+  @component
+  <%= description %>
+-->
+<script>
+<% props && props.forEach(prop => { -%>
+  /** <%= prop.description %> @type {<%= prop.type %>} */
+  export let <%= prop.name %>: <%= prop.type %>;
 <% }) -%>
-};
-<% } -%>
+</script>
 
-const styles = {};
-
-/**
- * <%= description %>
- */
-export function <%= name %>(<% if (locals.props) { %>{
-<% props.forEach(prop => { -%>
-  <%= prop.name.replace(/(\?)$/, '') %>,
-<% }) -%>
-  ...props
-}: <%= name %>Props
-<% } else { -%>props: any<% } %>) {
-  return (
-    <div {...props}>
-
-    </div>
-  );
-}
+<div class="{$$props.class}">
+</div>

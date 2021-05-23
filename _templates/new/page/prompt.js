@@ -5,15 +5,8 @@ module.exports = [
     message: 'Name'
   },
   {
-    type: 'confirm',
-    name: 'staticProps',
-    message: 'Will this page have staticProps?',
-    default: true
-  },
-    {
-    type: 'confirm',
+    type: 'input',
     name: 'prismic',
-    message: 'Will this page query Prismic?',
-    default: true
-  },
-    ];
+    message: 'Prismic type'
+  }
+];

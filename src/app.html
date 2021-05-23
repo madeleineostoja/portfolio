@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="theme-color" content="" />
+    <link rel="icon shortcut-icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#d71673" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-25ZW36Q33T"
+    />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-25ZW36Q33T');
+    </script>
+
+    %svelte.head%
+  </head>
+  <body class="typeset-paragraph">
+    <div id="svelte">%svelte.body%</div>
+  </body>
+</html>

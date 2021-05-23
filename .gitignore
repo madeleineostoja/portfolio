@@ -2,19 +2,12 @@
 node_modules
 
 # Runtime
-/.next
-/@types/_generated
-.env.*
-*.log*
+.DS_Store
+*.log
 
 # Build
+/.svelte-kit
+/.vercel_build_output
 /build
-/out
-/public/sw.js
-/public/workbox*
-/public/sitemap.xml
-/public/robots.txt
+/functions
 
-# Misc
-.DS_Store
-.vercel
