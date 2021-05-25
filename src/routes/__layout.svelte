@@ -1,9 +1,7 @@
 <script>
-  import { page } from '$app/stores';
+  import { SITE_URL } from 'src/lib/consts';
   import Meta from 'svelte-meta';
   import '../styles';
-
-  $: siteUrl = `${$page.host}${$page.path}`;
 </script>
 
 <style>
@@ -30,8 +28,8 @@
 </style>
 
 <Meta
-  {siteUrl}
-  logo="{siteUrl}/logo.png"
+  siteUrl={SITE_URL}
+  logo="{SITE_URL}/icon.png"
   openGraph={{
     type: 'website',
     locale: 'en_NZ'

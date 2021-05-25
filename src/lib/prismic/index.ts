@@ -1,10 +1,7 @@
 import type { PrismicImg } from './types';
 import PrismicDOM from 'prismic-dom';
 import Prismic from 'prismic-javascript';
-import type {
-  QueryOptions,
-  ResolvedApiOptions
-} from 'prismic-javascript/types/ResolvedApi';
+import type { QueryOptions } from 'prismic-javascript/types/ResolvedApi';
 import type Predicates from 'prismic-javascript/types/Predicates';
 import { placeholder } from 'svelte-imgix';
 import { PRISMIC_API } from '../consts';
