@@ -1,16 +1,18 @@
 <script context="module">
   export const load: Load = async () => {
+    const { data } = await queryAt('document.type', 'home', {
+      fetchLinks: [
+        'collection.name',
+        'collection.photos',
+        'photo.photo',
+        'photo.title',
+        'photo.uid'
+      ]
+    });
+
     return {
       props: {
-        data: await get('home', {
-          fetchLinks: [
-            'collection.name',
-            'collection.photos',
-            'photo.photo',
-            'photo.title',
-            'photo.uid'
-          ]
-        })
+        data
       }
     };
   };
@@ -18,17 +20,14 @@
 
 <script>
   import type { Load } from '@sveltejs/kit';
-  import { resolveDocument } from '../lib/resolve';
-  import { plaintext } from '../lib/richtext';
   import Meta from 'svelte-meta';
-  import type { WithMeta } from '../../@types/prismic';
   import type { Home } from '../../@types/_generated/prismic';
   import Collection from '../components/Collection/Collection.svelte';
   import Footer from '../components/Footer/Footer.svelte';
   import Header from '../components/Header/Header.svelte';
-  import { get } from '../lib/prismic';
+  import { plaintext, queryAt, resolveDocument } from '../lib/prismic';
 
-  export let data: WithMeta<Home>;
+  export let data: Home;
 </script>
 
 <style>
@@ -51,7 +50,7 @@
   <Collection
     class="collection"
     name={plaintext(collection?.data.name)}
-    photos={collection?.data.photos?.map(({ photo }) => photo.data)}
+    photos={collection?.data.photos.map(({ photo }) => photo.data)}
     href={resolveDocument(collection)}
   />
 {/each}

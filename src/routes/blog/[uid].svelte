@@ -1,18 +1,19 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import { plaintext, richtext } from '../../lib/richtext';
   import Meta from 'svelte-meta';
   import type { Post } from '../../../@types/_generated/prismic';
   import Footer from '../../components/Footer/Footer.svelte';
   import Header from '../../components/Header/Header.svelte';
   import ImageGrid from '../../components/ImageGrid/ImageGrid.svelte';
-  import { getUid } from '../../lib/prismic';
+  import { queryAt, plaintext, richtext } from '../../lib/prismic';
 
-  export const load: Load = async ({ page }) => ({
-    props: {
-      data: await getUid('post', page.params?.uid)
-    }
-  });
+  export const load: Load = async ({ page }) => {
+    const { data } = await queryAt('my.post.uid', page.params?.uid);
+
+    return {
+      props: { data }
+    };
+  };
 </script>
 
 <script>

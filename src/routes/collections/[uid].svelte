@@ -1,17 +1,17 @@
 <script context="module">
-  export const load: Load = async ({ page }) => ({
-    props: {
-      data: await getUid('collection', page.params?.uid as string, {
-        fetchLinks: ['photo.photo', 'photo.title']
-      })
-    }
-  });
+  export const load: Load = async ({ page }) => {
+    const { data } = await queryAt('my.collection.uid', page.params.uid, {
+      fetchLinks: ['photo.photo', 'photo.title']
+    });
+
+    return {
+      props: { data }
+    };
+  };
 </script>
 
 <script>
   import type { Load } from '@sveltejs/kit';
-  import { resolveDocument } from '../../lib/resolve';
-  import { plaintext } from '../../lib/richtext';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { Collection } from '../../../@types/_generated/prismic';
@@ -20,7 +20,12 @@
   import Footer from '../../components/Footer/Footer.svelte';
   import Header from '../../components/Header/Header.svelte';
   import SectionHeader from '../../components/SectionHeader/SectionHeader.svelte';
-  import { getUid, prismicImg } from '../../lib/prismic';
+  import {
+    prismicImg,
+    queryAt,
+    plaintext,
+    resolveDocument
+  } from '../../lib/prismic';
   import { customMedia } from '../../styles/breakpoints.json';
 
   export let data: Collection;
@@ -54,6 +59,8 @@
     display: inline-block;
     padding-bottom: var(--grid-gap);
     vertical-align: bottom;
+    /* Columns bug */
+    padding-top: 1px;
   }
 </style>
 
@@ -74,9 +81,9 @@
       {#each data.photos as { photo }}
         <a use:link href={resolveDocument(photo)} class="image">
           <img
-            use:imgix={photo.data.photo.url}
-            {...prismicImg(photo.data.photo)}
-            alt={photo.data.title}
+            use:imgix={photo?.data.photo.url}
+            {...prismicImg(photo?.data.photo)}
+            alt={photo?.data.title}
             sizes={`${customMedia['--mobile']} 50vw, ${customMedia['--tablet']} 33vw, 100vw`}
           />
         </a>

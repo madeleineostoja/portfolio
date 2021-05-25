@@ -1,25 +1,25 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import { resolveDocument } from '../../lib/resolve';
+  import type { PrismicDocument } from 'src/lib/prismic/types';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
-  import type { PrismicDocument, WithMeta } from '../../../@types/prismic';
   import type { Collection, Photo } from '../../../@types/_generated/prismic';
   import link from '../../actions/link';
   import PrevIcon from '../../assets/icons/caret-left.svelte';
   import NextIcon from '../../assets/icons/caret-right.svelte';
   import Button from '../../components/Button/Button.svelte';
-  import { getAll, getUid, prismicImg } from '../../lib/prismic';
+  import { prismicImg, queryAt, resolveDocument } from '../../lib/prismic';
 
   export const load: Load = async ({ page }) => {
-    const data = await getUid('photo', page.params.uid),
-      collections = await getAll('collection'),
+    const { uid, data } = await queryAt('my.photo.uid', page.params.uid),
+      collections = await queryAt('document.type', 'collection'),
       collection = collections.find(({ data: doc }: any) => {
-        return doc.photos.some(({ photo }: any) => photo.uid === data.uid);
+        return doc.photos.some(({ photo }: any) => photo.uid === uid);
       });
 
     return {
       props: {
+        uid,
         data,
         collection
       }
@@ -28,13 +28,13 @@
 </script>
 
 <script>
-  export let data: WithMeta<Photo>;
+  export let uid: string;
+  export let data: Photo;
   export let collection: PrismicDocument<Collection>;
 
   const { photos } = collection.data as any;
 
-  $: current =
-    photos?.findIndex(({ photo }: any) => photo?.uid === data.uid) || 0;
+  $: current = photos?.findIndex(({ photo }: any) => photo?.uid === uid) || 0;
 </script>
 
 <style>

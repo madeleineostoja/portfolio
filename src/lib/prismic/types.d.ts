@@ -1,6 +1,5 @@
-import type { Meta } from './_generated/prismic';
+import type { Meta } from '../../../@types/_generated/prismic';
 
-export type WithMeta<T> = T & Meta;
 export type PrismicDocument<T> = Meta & { data: T };
 export type PrismicSlice = {
   slice_type: string;

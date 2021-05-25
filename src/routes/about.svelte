@@ -1,6 +1,5 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import { plaintext, richtext } from '../lib/richtext';
   import imgix, { placeholder } from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { About } from '../../@types/_generated/prismic';
@@ -9,14 +8,14 @@
   import Header from '../components/Header/Header.svelte';
   import ImageGrid from '../components/ImageGrid/ImageGrid.svelte';
   import SectionHeader from '../components/SectionHeader/SectionHeader.svelte';
-  import { get } from '../lib/prismic';
+  import { plaintext, queryAt, richtext } from '../lib/prismic';
   import { customMedia } from '../styles/breakpoints.json';
 
   export const load: Load = async () => {
+    const { data } = await queryAt('document.type', 'about');
+
     return {
-      props: {
-        data: await get('about')
-      }
+      props: { data }
     };
   };
 </script>
