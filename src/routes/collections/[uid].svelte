@@ -25,7 +25,6 @@
   import { customMedia } from '../../styles/breakpoints.json';
 
   export let data: Collection;
-  export let uid: string;
 </script>
 
 <Meta
