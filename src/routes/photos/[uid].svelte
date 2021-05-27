@@ -14,7 +14,9 @@
     resolveDocument,
     resolveLink
   } from '../../lib/prismic';
+  import { page } from '$app/stores';
   import type { PrismicDocument } from '../../lib/prismic/types';
+  import { goto } from '$app/navigation';
 
   export const load: Load = async ({ page }) => {
     const { uid, data } = await queryAt('my.photo.uid', page.params.uid),
@@ -38,9 +40,16 @@
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
 
-  const { photos } = collection.data as any;
+  const { photos } = collection.data as any,
+    ref = $page.query.get('ref');
 
   $: current = photos?.findIndex(({ photo }: any) => photo?.uid === uid) || 0;
+
+  function handleKeydown({ key }: KeyboardEvent) {
+    if (key === 'Escape') {
+      goto(ref && ref === 'collection' ? resolveDocument(collection) : '/');
+    }
+  }
 </script>
 
 <style>
@@ -107,6 +116,8 @@
   }
 </style>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <Meta
   title={data.title}
   description={`${data.title}, captured on ${data.film} with the ${data.camera} by Madeleine Ostoja`}
@@ -140,7 +151,7 @@
         <a
           use:link
           class="navIcon"
-          href={resolveDocument(photos[current - 1].photo)}
+          href="{resolveDocument(photos[current - 1].photo)}?ref={ref}"
         >
           <PrevIcon />
         </a>
@@ -152,7 +163,7 @@
         <a
           use:link
           class="navIcon"
-          href={resolveDocument(photos[current + 1].photo)}
+          href="{resolveDocument(photos[current + 1].photo)}?ref={ref}"
         >
           <NextIcon />
         </a>

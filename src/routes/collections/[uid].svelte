@@ -12,7 +12,6 @@
 
 <script>
   import type { Load } from '@sveltejs/kit';
-  import { title } from 'process';
   import Gallery from 'svelte-gallery';
   import Meta from 'svelte-meta';
   import type { Collection } from '../../../@types/_generated/prismic';
@@ -26,6 +25,7 @@
   import { customMedia } from '../../styles/breakpoints.json';
 
   export let data: Collection;
+  export let uid: string;
 </script>
 
 <Meta
