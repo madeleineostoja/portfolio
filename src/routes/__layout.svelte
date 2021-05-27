@@ -2,6 +2,13 @@
   import { SITE_URL } from '../lib/consts';
   import Meta from 'svelte-meta';
   import '../styles';
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    const Fullstory = await import('@fullstory/browser');
+
+    Fullstory.init({ orgId: '130YX8 ' });
+  });
 </script>
 
 <style>
