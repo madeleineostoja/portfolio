@@ -11100,10 +11100,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-gallery@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/svelte-gallery/-/svelte-gallery-1.1.1.tgz#c303a609d2072128593f0a84d8371e6a4e572d76"
-  integrity sha512-/qTT+IZE3cyQtU8XLW3d1PFBqQbP0+9tEx7w9edUH+v6zIcJq7vZCH3wWckciIc6h73KLX0qGtqGO9eA9V906Q==
+svelte-gallery@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/svelte-gallery/-/svelte-gallery-1.2.0.tgz#dae14964ffb748b94129aef04208a682b9bbdf84"
+  integrity sha512-uvMzwi/Sdl+m3aSflf7xQ7FwLwJZJrb5x08t1NyMbpX9dk0G21g8+rRHdulv1+2I2D6gz4b82M0zIWynmJl/8g==
   dependencies:
     element-resize-event "^3.0.3"
     photoswipe "4.1.3"

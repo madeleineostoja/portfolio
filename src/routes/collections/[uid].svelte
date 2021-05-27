@@ -12,57 +12,21 @@
 
 <script>
   import type { Load } from '@sveltejs/kit';
-  import imgix from 'svelte-imgix';
+  import { title } from 'process';
+  import Gallery from 'svelte-gallery';
   import Meta from 'svelte-meta';
   import type { Collection } from '../../../@types/_generated/prismic';
-  import link from '../../actions/link';
   import Button from '../../components/Button/Button.svelte';
   import Footer from '../../components/Footer/Footer.svelte';
+  import GalleryImage from '../../components/GalleryImage/GalleryImage.svelte';
   import Header from '../../components/Header/Header.svelte';
   import SectionHeader from '../../components/SectionHeader/SectionHeader.svelte';
-  import {
-    prismicImg,
-    queryAt,
-    plaintext,
-    resolveDocument
-  } from '../../lib/prismic';
+  import { plaintext, queryAt } from '../../lib/prismic';
+  import { media } from '../../lib/stores';
   import { customMedia } from '../../styles/breakpoints.json';
 
   export let data: Collection;
 </script>
-
-<style>
-  .wrapper {
-    display: grid;
-    grid-template-columns: var(--grid-content);
-  }
-
-  .gallery {
-    grid-column: 1 / -1;
-    @media (--desktop) {
-      grid-column: 2 / span 10;
-    }
-  }
-
-  .images {
-    columns: 1;
-    column-gap: var(--grid-gap);
-    @media (--mobile) {
-      columns: 2;
-    }
-    @media (--tablet) {
-      columns: 3;
-    }
-  }
-
-  .image {
-    display: inline-block;
-    padding-bottom: var(--grid-gap);
-    vertical-align: bottom;
-    /* Columns bug */
-    padding-top: 1px;
-  }
-</style>
 
 <Meta
   title={data.meta_title}
@@ -72,24 +36,30 @@
 
 <Header />
 
-<div class="wrapper">
-  <section class="gallery">
-    <SectionHeader title={plaintext(data.name)} large>
-      <Button slot="action" back href="/">Back</Button></SectionHeader
-    >
-    <div class="images">
-      {#each data.photos as { photo }}
-        <a use:link href={resolveDocument(photo)} class="image">
-          <img
-            use:imgix={photo?.data.photo.url}
-            {...prismicImg(photo?.data.photo)}
-            alt={photo?.data.title}
-            sizes={`${customMedia['--mobile']} 50vw, ${customMedia['--tablet']} 33vw, 100vw`}
-          />
-        </a>
-      {/each}
-    </div>
-  </section>
-</div>
+<SectionHeader title={plaintext(data.name)} large>
+  <Button slot="action" back href="/">Back</Button></SectionHeader
+>
+<Gallery
+  gutter={$media['--desktop'] ? 12 : 16}
+  images={data.photos
+    ? data.photos.map(({ photo }) => {
+        const { url, dimensions } = photo?.data.photo;
+
+        return {
+          uid: photo?.uid,
+          src: url,
+          sizes: [
+            `${customMedia['--mobile']} 50vw`,
+            `${customMedia['--tablet']} 33vw`,
+            `100vw`
+          ],
+          alt: photo?.data.title,
+          ...dimensions
+        };
+      })
+    : []}
+  rowHeight={420}
+  imageComponent={GalleryImage}
+/>
 
 <Footer />
