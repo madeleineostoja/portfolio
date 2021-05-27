@@ -7,7 +7,6 @@
   import imgix, { placeholder } from 'svelte-imgix';
 
   export let uid: string;
-  export let collection: string;
   export let src: string;
   export let alt: string;
   export let width: string;
@@ -17,10 +16,17 @@
 
 <style>
   a {
+    display: block;
     transition: opacity 150ms ease;
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 </style>
 

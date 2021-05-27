@@ -5,8 +5,10 @@
   import { onMount } from 'svelte';
   import { customMedia } from '../../styles/breakpoints.json';
   import { media } from '../../lib/stores';
+  import ImageGridImg from './ImageGridImg.svelte';
 
   export let images: PrismicImg[] = [];
+  export let sizes: string;
 </script>
 
 <style>
@@ -20,14 +22,13 @@
 
 <div class="images {$$props.class}">
   <Gallery
-    gutter={$media['--desktop'] ? 8 : 12}
+    gutter={$media['--desktop'] ? 12 : 16}
     images={images.map(({ dimensions, url, alt }) => ({
-      placeholder: placeholder(url),
       src: url,
-      srcset: srcset(url),
-      sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+      sizes,
       alt,
       ...dimensions
     }))}
+    imageComponent={ImageGridImg}
   />
 </div>

@@ -12,6 +12,8 @@
   export let href: string;
   /** No description */
   export let photos: ({ uid: string } & Photo)[];
+
+  const photoPage = (uid: string) => resolveDocument({ type: 'photo', uid });
 </script>
 
 <style>
@@ -43,9 +45,9 @@
         class="photo"
         use:imgix={photo.url}
         {...prismicImg(photo)}
-        on:click={() => goto(resolveDocument({ type: 'photo', uid }))}
-        on:mouseenter={() => prefetch(resolveDocument({ type: 'photo', uid }))}
-        on:touchstart={() => prefetch(resolveDocument({ type: 'photo', uid }))}
+        on:click={() => goto(photoPage(uid))}
+        on:mouseenter={() => prefetch(photoPage(uid))}
+        on:touchstart={() => prefetch(photoPage(uid))}
         sizes="450px"
         alt={title}
       />

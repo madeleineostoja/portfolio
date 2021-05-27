@@ -36,6 +36,8 @@
 </script>
 
 <script>
+  import { customMedia } from '../../styles/breakpoints.json';
+
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
@@ -143,6 +145,7 @@
       class="photo"
       use:imgix={data.photo.url}
       {...prismicImg(data.photo)}
+      sizes="{customMedia['--tablet']} 50vw, 100vw"
       alt={data.title}
     />
 

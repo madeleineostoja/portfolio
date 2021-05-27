@@ -8,7 +8,7 @@
   import Header from '../components/Header/Header.svelte';
   import ImageGrid from '../components/ImageGrid/ImageGrid.svelte';
   import SectionHeader from '../components/SectionHeader/SectionHeader.svelte';
-  import { plaintext, queryAt, richtext } from '../lib/prismic';
+  import { plaintext, prismicImg, queryAt, richtext } from '../lib/prismic';
   import { customMedia } from '../styles/breakpoints.json';
 
   export const load: Load = async () => {
@@ -31,9 +31,6 @@
       display: block;
       grid-column: 1 / 4;
     }
-    @media (--desktop) {
-      grid-column: 2 / 5;
-    }
   }
 
   .sidebar-image {
@@ -47,13 +44,10 @@
       color: var(--color-primary);
     }
     @media (--tablet) {
-      grid-column: 2 / 11;
+      grid-column: 2 / 12;
     }
     @media (--laptop) {
-      grid-column: 5 / 13;
-    }
-    @media (--desktop) {
-      grid-column: 6 / 12;
+      grid-column: 5 / -1;
     }
   }
 </style>
@@ -66,10 +60,9 @@
     <img
       class="sidebar-image"
       use:imgix={data.image.url}
-      src={placeholder(data.image.url)}
+      {...prismicImg(data.image)}
       alt="Photo of Madeleine Ostoja"
-      sizes={`${customMedia['--tablet']} 33vw, 100vw`}
-      {...data.image.dimensions}
+      sizes="33vw"
     />
   </aside>
   <div class="article">
@@ -85,7 +78,10 @@
         {/if}
 
         {#if slice_type === 'images'}
-          <ImageGrid images={items.map(({ image }) => image)} />
+          <ImageGrid
+            images={items.map(({ image }) => image)}
+            sizes="{customMedia['--tablet']} 33vw, 50vw"
+          />
         {/if}
       {/each}
     </article>

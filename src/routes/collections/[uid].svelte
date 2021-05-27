@@ -47,11 +47,7 @@
         return {
           uid: photo?.uid,
           src: url,
-          sizes: [
-            `${customMedia['--mobile']} 50vw`,
-            `${customMedia['--tablet']} 33vw`,
-            `100vw`
-          ],
+          sizes: `${customMedia['--tablet']} 33vw, ${customMedia['--mobile']} 50vw, 100vw`,
           alt: photo?.data.title,
           ...dimensions
         };
