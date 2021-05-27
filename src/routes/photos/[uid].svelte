@@ -1,14 +1,20 @@
 <script context="module">
   import type { Load } from '@sveltejs/kit';
-  import type { PrismicDocument } from 'src/lib/prismic/types';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
   import type { Collection, Photo } from '../../../@types/_generated/prismic';
   import link from '../../actions/link';
   import PrevIcon from '../../assets/icons/caret-left.svelte';
   import NextIcon from '../../assets/icons/caret-right.svelte';
+  import Anchor from '../../components/Anchor/Anchor.svelte';
   import Button from '../../components/Button/Button.svelte';
-  import { prismicImg, queryAt, resolveDocument } from '../../lib/prismic';
+  import {
+    prismicImg,
+    queryAt,
+    resolveDocument,
+    resolveLink
+  } from '../../lib/prismic';
+  import type { PrismicDocument } from '../../lib/prismic/types';
 
   export const load: Load = async ({ page }) => {
     const { uid, data } = await queryAt('my.photo.uid', page.params.uid),
@@ -117,6 +123,9 @@
     <p class="description">
       {`Captured on ${data.film} film, with the ${data.camera}`}
     </p>
+    {#if data.store_link}
+      <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
+    {/if}
   </div>
   <div class="frame">
     <img

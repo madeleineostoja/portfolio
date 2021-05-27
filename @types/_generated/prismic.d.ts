@@ -219,6 +219,7 @@ export type Photo = _Document &
     photo?: Maybe<Scalars['Json']>;
     camera?: Maybe<Scalars['String']>;
     film?: Maybe<Scalars['String']>;
+    store_link?: Maybe<_Linkable>;
     _meta: Meta;
     _linkType?: Maybe<Scalars['String']>;
   };
@@ -654,6 +655,8 @@ export type WherePhoto = {
   camera_fulltext?: Maybe<Scalars['String']>;
   film?: Maybe<Scalars['String']>;
   film_fulltext?: Maybe<Scalars['String']>;
+  /** store_link */
+  store_link?: Maybe<Scalars['String']>;
 };
 
 export type WherePost = {

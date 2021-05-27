@@ -16,6 +16,15 @@
   export let sizes: string;
 </script>
 
+<style>
+  a {
+    transition: opacity 150ms ease;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+</style>
+
 <a href={resolveDocument({ type: 'photo', uid })}>
   <img use:imgix={src} src={placeholder(src)} {sizes} {alt} {width} {height} />
 </a>
