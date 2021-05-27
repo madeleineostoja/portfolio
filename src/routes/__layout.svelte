@@ -1,5 +1,5 @@
 <script>
-  import { SITE_URL } from 'src/lib/consts';
+  import { SITE_URL } from '../lib/consts';
   import Meta from 'svelte-meta';
   import '../styles';
 </script>
