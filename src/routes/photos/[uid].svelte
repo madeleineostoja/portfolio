@@ -148,7 +148,7 @@
     <p class="description">
       {`Captured on ${data.film} film, with the ${data.camera} camera`}
     </p>
-    {#if data.store_link}
+    {#if data.store_link.url}
       <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
     {/if}
   </div>
