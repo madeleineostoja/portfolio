@@ -19,18 +19,13 @@
   import type { PrismicDocument } from '../../lib/prismic/types';
   import { customMedia } from '../../styles/breakpoints.json';
 
-  export const load: Load = async ({ page }) => {
-    const { uid, data } = await queryAt('my.photo.uid', page.params.uid),
-      collections = await queryAt('document.type', 'collection'),
-      collection = collections.find(({ data: doc }: any) => {
-        return doc.photos.some(({ photo }: any) => photo.uid === uid);
-      });
+  export const load: Load = async ({ page, fetch }) => {
+    const url = `/photos/${page.params.uid}.json`;
+    const res = await fetch(url);
 
     return {
       props: {
-        uid,
-        data,
-        collection
+        ...(await res.json())
       }
     };
   };
