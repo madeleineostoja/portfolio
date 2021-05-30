@@ -20,7 +20,7 @@
   .photos {
     grid-column: 2 / -1;
     display: flex;
-    height: 17rem;
+    height: 20rem;
   }
 
   .photo {
@@ -48,7 +48,7 @@
         on:click={() => goto(photoPage(uid))}
         on:mouseenter={() => prefetch(photoPage(uid))}
         on:touchstart={() => prefetch(photoPage(uid))}
-        sizes="450px"
+        sizes="480px"
         alt={title}
       />
     {/each}

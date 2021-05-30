@@ -1,4 +1,6 @@
 <script context="module">
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import type { Load } from '@sveltejs/kit';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
@@ -8,15 +10,9 @@
   import NextIcon from '../../assets/icons/caret-right.svelte';
   import Anchor from '../../components/Anchor/Anchor.svelte';
   import Button from '../../components/Button/Button.svelte';
-  import {
-    prismicImg,
-    queryAt,
-    resolveDocument,
-    resolveLink
-  } from '../../lib/prismic';
-  import { page } from '$app/stores';
+  import { queryAt, resolveDocument, resolveLink } from '../../lib/prismic';
   import type { PrismicDocument } from '../../lib/prismic/types';
-  import { goto } from '$app/navigation';
+  import { customMedia } from '../../styles/breakpoints.json';
 
   export const load: Load = async ({ page }) => {
     const { uid, data } = await queryAt('my.photo.uid', page.params.uid),
@@ -36,20 +32,36 @@
 </script>
 
 <script>
-  import { customMedia } from '../../styles/breakpoints.json';
-
+  import { prismicImg } from '../../lib/prismic';
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
 
-  const { photos } = collection.data as any,
-    ref = $page.query.get('ref');
-
   $: current = photos?.findIndex(({ photo }: any) => photo?.uid === uid) || 0;
 
+  const { photos } = collection.data as any,
+    ref = $page.query.get('ref'),
+    getPhotoHref = (photosIndex: number) =>
+      `${resolveDocument(photos[photosIndex].photo)}${
+        ref ? `?ref=${ref}` : ''
+      }`;
+
+  $: firstPhoto = current === 0;
+  $: lastPhoto = current === photos.length - 1;
+  $: previousPhoto = !firstPhoto ? getPhotoHref(current - 1) : '';
+  $: nextPhoto = !lastPhoto ? getPhotoHref(current + 1) : '';
+
   function handleKeydown({ key }: KeyboardEvent) {
-    if (key === 'Escape') {
-      goto(ref && ref === 'collection' ? resolveDocument(collection) : '/');
+    switch (key) {
+      case 'Escape':
+        goto(ref && ref === 'collection' ? resolveDocument(collection) : '/');
+        break;
+      case 'ArrowLeft':
+        current !== 0 && goto(previousPhoto);
+        break;
+      case 'ArrowRight':
+        current !== photos.length - 1 && goto(nextPhoto);
+        break;
     }
   }
 </script>
@@ -134,7 +146,7 @@
   <div class="details">
     <h1 class="typeset-h1">{data.title}</h1>
     <p class="description">
-      {`Captured on ${data.film} film, with the ${data.camera}`}
+      {`Captured on ${data.film} film, with the ${data.camera} camera`}
     </p>
     {#if data.store_link}
       <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
@@ -150,24 +162,16 @@
     />
 
     <nav class="nav">
-      {#if current > 0}
-        <a
-          use:link
-          class="navIcon"
-          href="{resolveDocument(photos[current - 1].photo)}?ref={ref}"
-        >
+      {#if !firstPhoto}
+        <a use:link class="navIcon" href={previousPhoto}>
           <PrevIcon />
         </a>
       {:else}
         <div />
       {/if}
 
-      {#if current + 1 < photos.length}
-        <a
-          use:link
-          class="navIcon"
-          href="{resolveDocument(photos[current + 1].photo)}?ref={ref}"
-        >
+      {#if !lastPhoto}
+        <a use:link class="navIcon" href={nextPhoto}>
           <NextIcon />
         </a>
       {:else}

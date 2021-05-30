@@ -1,10 +1,34 @@
 <script>
+  import { ICON_PROPS } from '../../lib/consts';
+
   import Hamburger from 'svelte-hamburger';
   import { fade } from 'svelte/transition';
-  import link from '../../actions/link';
+  import link, { active } from '../../actions/link';
   import InstagramIcon from '../../assets/icons/instagram.svelte';
   import MailIcon from '../../assets/icons/mail.svelte';
   import TwitterIcon from '../../assets/icons/twitter.svelte';
+  import { resolveDocument } from '../../lib/prismic';
+
+  const NAVS = {
+    collections: [
+      {
+        href: resolveDocument({ type: 'collection', uid: 'urban-landscape' }),
+        label: 'Urban Landscape'
+      },
+      {
+        href: resolveDocument({ type: 'collection', uid: 'the-streets' }),
+        label: 'Street'
+      },
+      {
+        href: resolveDocument({ type: 'collection', uid: 'people' }),
+        label: 'People'
+      }
+    ],
+    site: [
+      { href: '/about', label: 'About' },
+      { href: 'https://madi.darkroom.tech', label: 'Prints' }
+    ]
+  };
 
   let mobNavOpen = false;
 
@@ -19,42 +43,50 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-6);
-    font-size: var(--scale-0);
     @media (--tablet) {
       margin-bottom: var(--spacing-7);
     }
   }
 
+  .mast {
+    display: flex;
+    align-items: center;
+  }
+
   .logo {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
     font-size: var(--scale-1);
+    margin-right: 2rem;
+    line-height: 1;
+    letter-spacing: var(--tracking-00);
   }
 
   .nav {
     display: none;
     align-items: center;
+
     & > *:not(:last-of-type) {
-      margin-right: 1.5rem;
+      margin-right: 1rem;
     }
-    @media (--mobile) {
+    @media (--tablet) {
       display: flex;
     }
   }
 
-  .navIcon :global(svg) {
-    fill: currentColor;
-    width: var(--scale-3);
-    height: var(--scale-3);
-    @media (--mobile) {
-      width: 1em;
-      height: 1em;
+  .navLink {
+    color: var(--color-text-secondary);
+    transition: color 150ms ease;
+    &:hover,
+    &:global(.active) {
+      color: var(--color-text);
     }
   }
 
   .hamburger {
     z-index: var(--layer-top);
     cursor: pointer;
-    @media (--mobile) {
+    @media (--tablet) {
       display: none;
     }
   }
@@ -71,14 +103,29 @@
     z-index: var(--layer-5);
   }
 
-  .mobNavLink {
-    margin-bottom: 1em;
+  .mobNav {
+    & > * {
+      margin-bottom: 1em;
+    }
+  }
+
+  .mobNavHeading {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+  }
+
+  .mobNav--collections {
+    margin-bottom: var(--spacing-3);
+    padding-bottom: var(--spacing-2);
+    border-bottom: 1px solid var(--color-grey-300);
   }
 
   .mobSocials {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: var(--scale-2);
+    color: var(--color-text);
     & > * {
       margin: 0 1.5rem;
     }
@@ -86,36 +133,20 @@
 </style>
 
 <header class="typeset-ui {$$props.class}">
-  <a use:link href="/">
-    <h1 class="logo">Madeleine Ostoja</h1>
-  </a>
+  <div class="mast">
+    <a use:link href="/">
+      <h1 class="logo">Madeleine Ostoja</h1>
+    </a>
+    <nav class="nav">
+      {#each NAVS.collections as { href, label }}
+        <a use:link use:active class="navLink" {href}>{label}</a>
+      {/each}
+    </nav>
+  </div>
   <nav class="nav">
-    <a
-      use:link
-      href="https://twitter.com/madeleineostoja"
-      aria-label="Twitter"
-      class="navIcon"
-    >
-      <TwitterIcon />
-    </a>
-    <a
-      use:link
-      href="https://instagram.com/madeleineostoja"
-      aria-label="Instagram"
-      class="navIcon"
-    >
-      <InstagramIcon />
-    </a>
-    <a
-      use:link
-      href="mailto:madi@madeleineostoja.com"
-      aria-label="Email"
-      class="navIcon"
-    >
-      <MailIcon />
-    </a>
-    <a use:link href="/about">About</a>
-    <a use:link href="https://madi.darkroom.tech">Prints</a>
+    {#each NAVS.site as { href, label }}
+      <a use:link use:active class="navLink" {href}>{label}</a>
+    {/each}
   </nav>
   <div class="hamburger">
     <Hamburger open={mobNavOpen} on:click={() => (mobNavOpen = !mobNavOpen)} />
@@ -124,51 +155,58 @@
 
 {#if mobNavOpen}
   <div class="mobMenu pageGrid" transition:fade={{ duration: 150 }}>
-    <nav>
-      <a
-        use:link
-        class="mobNavLink typeset-h2"
-        on:click={closeMenu}
-        href="/about"
-      >
-        About
-      </a>
-      <a
-        use:link
-        class="mobNavLink typeset-h2"
-        on:click={closeMenu}
-        href="https://madi.darkroom.tech"
-      >
-        Prints
-      </a>
-    </nav>
+    <div>
+      <nav class="mobNav mobNav--collections">
+        {#each NAVS.collections as { href, label }}
+          <a
+            use:link
+            use:active
+            class="navLink typeset-h2"
+            on:click={closeMenu}
+            {href}
+          >
+            {label}
+          </a>
+        {/each}
+      </nav>
+      <nav class="mobNav">
+        {#each NAVS.site as { href, label }}
+          <a
+            use:link
+            use:active
+            class="navLink typeset-h2"
+            on:click={closeMenu}
+            {href}
+          >
+            {label}
+          </a>
+        {/each}
+      </nav>
+    </div>
     <div class="mobSocials">
       <a
         use:link
         on:click={closeMenu}
         href="https://twitter.com/madeleineostoja"
-        class="navIcon"
         aria-label="Twitter"
       >
-        <TwitterIcon />
+        <TwitterIcon {...ICON_PROPS} />
       </a>
       <a
         use:link
         on:click={closeMenu}
         href="https://instagram.com/madeleineostoja"
-        class="navIcon"
         aria-label="Instagram"
       >
-        <InstagramIcon />
+        <InstagramIcon {...ICON_PROPS} />
       </a>
       <a
         use:link
         on:click={closeMenu}
         href="mailto:madi@madeleineostoja.com"
-        class="navIcon"
         aria-label="Email"
       >
-        <MailIcon />
+        <MailIcon {...ICON_PROPS} />
       </a>
     </div>
   </div>

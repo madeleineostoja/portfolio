@@ -35,11 +35,11 @@
 
 <Header />
 
-<SectionHeader title={plaintext(data.name)} large>
+<!-- <SectionHeader title={plaintext(data.name)} large>
   <Button slot="action" back href="/">Back</Button></SectionHeader
->
+> -->
 <Gallery
-  gutter={$media['--desktop'] ? 12 : 16}
+  gutter={$media['--tablet'] ? 32 : 16}
   images={data.photos
     ? data.photos.map(({ photo }) => {
         const { url, dimensions } = photo?.data.photo;

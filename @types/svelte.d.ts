@@ -1,1 +1,1 @@
-declare module 'svelte-media';
+// declare module 'svelte-media';

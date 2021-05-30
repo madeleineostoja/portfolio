@@ -22,7 +22,7 @@
 
 <div class="images {$$props.class}">
   <Gallery
-    gutter={$media['--desktop'] ? 12 : 16}
+    gutter={16}
     images={images.map(({ dimensions, url, alt }) => ({
       src: url,
       sizes,

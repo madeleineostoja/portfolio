@@ -19,10 +19,7 @@
     display: inline-flex;
     align-items: center;
     font-size: var(--scale-00);
-    padding: 0.5em 1em;
-    border-radius: var(--radius-round);
-    background: var(--color-grey-100);
-    color: var(--color-grey-700);
+    color: var(--color-text-secondary);
   }
 </style>
 

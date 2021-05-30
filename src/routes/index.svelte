@@ -37,9 +37,6 @@
 
   :global(.collection:not(:last-of-type)) {
     margin-bottom: var(--spacing-4);
-    @media (--mobile) {
-      margin-bottom: var(--spacing-5);
-    }
   }
 </style>
 
