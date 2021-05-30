@@ -5,7 +5,7 @@
   import Footer from '../../components/Footer/Footer.svelte';
   import Header from '../../components/Header/Header.svelte';
   import ImageGrid from '../../components/ImageGrid/ImageGrid.svelte';
-  import { queryAt, plaintext, richtext } from '../../lib/prismic';
+  import { plaintext, queryAt, richtext } from '../../lib/prismic';
 
   export const load: Load = async ({ page }) => {
     const { data } = await queryAt('my.post.uid', page.params?.uid);

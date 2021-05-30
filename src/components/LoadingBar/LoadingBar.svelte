@@ -5,6 +5,8 @@
 <script>
   /** Whether the page is loading @type {boolean} */
   export let loading: boolean;
+  export let duration: string = '3s';
+  export let delay: string = '150ms';
 </script>
 
 <style>
@@ -16,9 +18,8 @@
     width: 100%;
     transform: scaleX(0);
     background: var(--color-primary);
-    animation: load var(--easing-decelerate) var(--duration, 3s);
+    animation: load var(--easing-decelerate);
     transform-origin: 0 0;
-    animation-delay: var(--delay, 100ms);
   }
 
   @keyframes load {
@@ -32,5 +33,8 @@
 </style>
 
 {#if loading}
-  <div class="loader {$$props.class}" />
+  <div
+    class="loader {$$props.class}"
+    style="animation-duration: {duration}; animation-delay: {delay}"
+  />
 {/if}

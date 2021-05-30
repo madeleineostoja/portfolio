@@ -1,14 +1,16 @@
 <script>
-  import { SITE_URL } from '../lib/consts';
-  import Meta from 'svelte-meta';
-  import '../styles';
-  import { onMount } from 'svelte';
+  import { prefetchRoutes } from '$app/navigation';
   import { navigating } from '$app/stores';
+  import { onMount } from 'svelte';
+  import Meta from 'svelte-meta';
   import LoadingBar from '../components/LoadingBar/LoadingBar.svelte';
+  import { SITE_URL } from '../lib/consts';
+  import '../styles';
 
   onMount(async () => {
     const Fullstory = await import('@fullstory/browser');
 
+    prefetchRoutes();
     Fullstory.init({ orgId: '130YX8 ' });
   });
 </script>
@@ -45,7 +47,7 @@
   }}
 />
 
-<LoadingBar loading={!!$navigating} --duration="3s" --delay="100ms" />
+<LoadingBar loading={!!$navigating} duration="2s" delay="300ms" />
 <main class="grid">
   <div class="grid content">
     <slot />

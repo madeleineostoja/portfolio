@@ -10,7 +10,12 @@
   import NextIcon from '../../assets/icons/caret-right.svelte';
   import Anchor from '../../components/Anchor/Anchor.svelte';
   import Button from '../../components/Button/Button.svelte';
-  import { queryAt, resolveDocument, resolveLink } from '../../lib/prismic';
+  import {
+    prismicImg,
+    queryAt,
+    resolveDocument,
+    resolveLink
+  } from '../../lib/prismic';
   import type { PrismicDocument } from '../../lib/prismic/types';
   import { customMedia } from '../../styles/breakpoints.json';
 
@@ -32,7 +37,6 @@
 </script>
 
 <script>
-  import { prismicImg } from '../../lib/prismic';
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;

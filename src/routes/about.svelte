@@ -53,6 +53,7 @@
 </style>
 
 <Meta title={data.meta_title} description={data.meta_description} />
+
 <Header />
 
 <section class="contentGrid">
@@ -87,4 +88,5 @@
     </article>
   </div>
 </section>
+
 <Footer />

@@ -1,4 +1,12 @@
 <script context="module">
+  import type { Load } from '@sveltejs/kit';
+  import Meta from 'svelte-meta';
+  import type { Home } from '../../@types/_generated/prismic';
+  import Collection from '../components/Collection/Collection.svelte';
+  import Footer from '../components/Footer/Footer.svelte';
+  import Header from '../components/Header/Header.svelte';
+  import { plaintext, queryAt, resolveDocument } from '../lib/prismic';
+
   export const load: Load = async () => {
     const { data } = await queryAt('document.type', 'home', {
       fetchLinks: [
@@ -19,14 +27,6 @@
 </script>
 
 <script>
-  import type { Load } from '@sveltejs/kit';
-  import Meta from 'svelte-meta';
-  import type { Home } from '../../@types/_generated/prismic';
-  import Collection from '../components/Collection/Collection.svelte';
-  import Footer from '../components/Footer/Footer.svelte';
-  import Header from '../components/Header/Header.svelte';
-  import { plaintext, queryAt, resolveDocument } from '../lib/prismic';
-
   export let data: Home;
 </script>
 
