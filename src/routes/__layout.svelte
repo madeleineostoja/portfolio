@@ -3,6 +3,8 @@
   import Meta from 'svelte-meta';
   import '../styles';
   import { onMount } from 'svelte';
+  import { navigating } from '$app/stores';
+  import LoadingBar from '../components/LoadingBar/LoadingBar.svelte';
 
   onMount(async () => {
     const Fullstory = await import('@fullstory/browser');
@@ -43,6 +45,7 @@
   }}
 />
 
+<LoadingBar loading={!!$navigating} --duration="3s" --delay="100ms" />
 <main class="grid">
   <div class="grid content">
     <slot />
