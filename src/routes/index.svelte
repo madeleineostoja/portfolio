@@ -31,6 +31,10 @@
 </script>
 
 <style>
+  section {
+    overflow: hidden;
+  }
+
   :global(.collection:not(:last-of-type)) {
     margin-bottom: var(--spacing-4);
     @media (--mobile) {
@@ -46,12 +50,14 @@
 />
 
 <Header />
-{#each data.collections as { collection }}
-  <Collection
-    class="collection"
-    name={plaintext(collection?.data.name)}
-    photos={collection?.data.photos.map(({ photo }) => photo.data)}
-    href={resolveDocument(collection)}
-  />
-{/each}
+<section class="pageGrid fullbleed">
+  {#each data.collections as { collection }}
+    <Collection
+      class="collection"
+      name={plaintext(collection?.data.name)}
+      photos={collection?.data.photos.map(({ photo }) => photo.data)}
+      href={resolveDocument(collection)}
+    />
+  {/each}
+</section>
 <Footer />
