@@ -10,7 +10,7 @@ function isExternal(anchor: HTMLAnchorElement) {
 }
 
 export default function link(anchor: HTMLAnchorElement) {
-  const prefetchLink = () => !isExternal && prefetch(anchor.href);
+  const prefetchLink = () => !isExternal(anchor) && prefetch(anchor.href);
 
   if (isExternal(anchor)) {
     anchor.target = '_blank';

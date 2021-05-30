@@ -5,6 +5,7 @@
 <script>
   import { resolveDocument } from '../../lib/prismic';
   import imgix, { placeholder } from 'svelte-imgix';
+  import link from '../../actions/link';
 
   export let uid: string;
   export let src: string;
@@ -30,6 +31,6 @@
   }
 </style>
 
-<a href="{resolveDocument({ type: 'photo', uid })}?ref=collection">
+<a use:link href="{resolveDocument({ type: 'photo', uid })}?ref=collection">
   <img use:imgix={src} src={placeholder(src)} {sizes} {alt} {width} {height} />
 </a>
