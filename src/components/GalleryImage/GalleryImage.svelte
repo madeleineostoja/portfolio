@@ -18,8 +18,10 @@
   a {
     display: block;
     transition: opacity 150ms ease;
-    &:hover {
-      opacity: 0.8;
+    @media (--mobile) {
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
