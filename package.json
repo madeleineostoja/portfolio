@@ -28,6 +28,7 @@
     "@storybook/addon-svelte-csf": "^1.0.0",
     "@storybook/svelte": "^6.2.9",
     "@sveltejs/adapter-static": "next",
+    "@sveltejs/adapter-vercel": "^1.0.0-next.20",
     "@types/html-minifier": "^4.0.0",
     "@types/node": "^15.6.1",
     "@types/prismic-dom": "^2.1.1",
