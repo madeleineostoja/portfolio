@@ -6,7 +6,7 @@
   import { resolveDocument } from '$src/lib/prismic';
   import Hamburger from 'svelte-hamburger';
   import { fade } from 'svelte/transition';
-  import { ICON_PROPS } from '../../lib/consts';
+  import { ICON_PROPS } from '$src/lib/consts';
 
   const NAVS = {
     collections: [

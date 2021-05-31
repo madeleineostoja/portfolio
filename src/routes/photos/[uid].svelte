@@ -1,7 +1,7 @@
 <script context="module">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import type { Collection, Photo } from '$src/../@types/_generated/prismic';
+  import type { Collection, Photo } from '$types/_generated/prismic';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
   import Anchor from '$src/components/Anchor/Anchor.svelte';
