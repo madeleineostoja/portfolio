@@ -7,15 +7,15 @@
   import '$src/styles';
   import Meta from 'svelte-meta';
 
-  // async function initFullstory() {
-  //   const Fullstory = await import('@fullstory/browser');
-  //   Fullstory.init({ orgId: '130YX8 ' });
-  // }
+  async function initFullstory() {
+    const Fullstory = await import('@fullstory/browser');
+    Fullstory.init({ orgId: '130YX8 ' });
+  }
 
-  // if (browser) {
-  //   initFullstory();
-  //   prefetchRoutes();
-  // }
+  if (browser) {
+    initFullstory();
+    prefetchRoutes();
+  }
 </script>
 
 <style>
