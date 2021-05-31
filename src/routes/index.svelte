@@ -3,6 +3,7 @@
   import Footer from '$src/components/Footer/Footer.svelte';
   import Header from '$src/components/Header/Header.svelte';
   import { plaintext, queryAt, resolveDocument } from '$src/lib/prismic';
+  import { returnProps } from '$src/lib/utils';
   import type { Home } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import Meta from 'svelte-meta';
@@ -18,7 +19,7 @@
       ]
     });
 
-    return data ? { props: { data } } : undefined;
+    return returnProps({ data });
   };
 </script>
 

@@ -13,6 +13,7 @@
     resolveLink
   } from '$src/lib/prismic';
   import type { PrismicDocument } from '$src/lib/prismic/types';
+  import { returnProps } from '$src/lib/utils';
   import { customMedia } from '$src/styles/breakpoints.json';
   import type { Load } from '@sveltejs/kit';
   import imgix from 'svelte-imgix';
@@ -25,15 +26,11 @@
         return doc.photos.some(({ photo }: any) => photo.uid === uid);
       });
 
-    return data
-      ? {
-          props: {
-            uid,
-            data,
-            collection
-          }
-        }
-      : undefined;
+    return returnProps({
+      uid,
+      data,
+      collection
+    });
   };
 </script>
 
