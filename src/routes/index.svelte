@@ -1,4 +1,6 @@
 <script context="module">
+  import { browser } from '$app/env';
+  import { prefetch } from '$app/navigation';
   import Collection from '$src/components/Collection/Collection.svelte';
   import Footer from '$src/components/Footer/Footer.svelte';
   import Header from '$src/components/Header/Header.svelte';
@@ -25,6 +27,10 @@
 
 <script>
   export let data: Home;
+
+  if (browser) {
+    prefetch('/about');
+  }
 </script>
 
 <style>
