@@ -1,7 +1,7 @@
 <script>
-  import PrevIcon from '../../assets/icons/caret-left.svelte';
-  import NextIcon from '../../assets/icons/caret-right.svelte';
-  import link from '../../actions/link';
+  import link from '$src/actions/link';
+  import PrevIcon from '$src/assets/icons/caret-left.svelte';
+  import NextIcon from '$src/assets/icons/caret-right.svelte';
 
   /** Link for the button */
   export let href: string;

@@ -3,8 +3,8 @@
   Anchor CTA
 -->
 <script>
-  import link from '../../actions/link';
-  import Arrow from '../../assets/icons/arrow-right.svelte';
+  import link from '$src/actions/link';
+  import Arrow from '$src/assets/icons/arrow-right.svelte';
 
   /** URL to link to */
   export let href: string;

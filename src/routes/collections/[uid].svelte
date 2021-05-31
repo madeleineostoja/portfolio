@@ -1,29 +1,30 @@
 <script context="module">
-  export const load: Load = async ({ page }) => {
-    const { data } = await queryAt('my.collection.uid', page.params.uid, {
-      fetchLinks: ['photo.photo', 'photo.title']
-    });
+  import Footer from '$src/components/Footer/Footer.svelte';
+  import GalleryImage from '$src/components/GalleryImage/GalleryImage.svelte';
+  import Header from '$src/components/Header/Header.svelte';
+  import { queryAt } from '$src/lib/prismic';
+  import { media } from '$src/lib/stores';
+  import { customMedia } from '$src/styles/breakpoints.json';
+  import type { Collection } from '$types/_generated/prismic';
+  import type { Load } from '@sveltejs/kit';
+  import Gallery from 'svelte-gallery';
+  import Meta from 'svelte-meta';
 
-    return {
-      props: { data }
-    };
+  export const load: Load = async ({ page, fetch }) => {
+    const { data } = await queryAt(
+      'my.collection.uid',
+      page.params.uid,
+      fetch,
+      {
+        fetchLinks: ['photo.photo', 'photo.title']
+      }
+    );
+
+    return data ? { props: { data } } : undefined;
   };
 </script>
 
 <script>
-  import type { Load } from '@sveltejs/kit';
-  import Gallery from 'svelte-gallery';
-  import Meta from 'svelte-meta';
-  import type { Collection } from '../../../@types/_generated/prismic';
-  import Button from '../../components/Button/Button.svelte';
-  import Footer from '../../components/Footer/Footer.svelte';
-  import GalleryImage from '../../components/GalleryImage/GalleryImage.svelte';
-  import Header from '../../components/Header/Header.svelte';
-  import SectionHeader from '../../components/SectionHeader/SectionHeader.svelte';
-  import { plaintext, queryAt } from '../../lib/prismic';
-  import { media } from '../../lib/stores';
-  import { customMedia } from '../../styles/breakpoints.json';
-
   export let data: Collection;
 </script>
 

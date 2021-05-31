@@ -1,18 +1,16 @@
 <script context="module">
+  import Footer from '$src/components/Footer/Footer.svelte';
+  import Header from '$src/components/Header/Header.svelte';
+  import ImageGrid from '$src/components/ImageGrid/ImageGrid.svelte';
+  import { plaintext, queryAt, richtext } from '$src/lib/prismic';
+  import type { Post } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import Meta from 'svelte-meta';
-  import type { Post } from '../../../@types/_generated/prismic';
-  import Footer from '../../components/Footer/Footer.svelte';
-  import Header from '../../components/Header/Header.svelte';
-  import ImageGrid from '../../components/ImageGrid/ImageGrid.svelte';
-  import { plaintext, queryAt, richtext } from '../../lib/prismic';
 
-  export const load: Load = async ({ page }) => {
-    const { data } = await queryAt('my.post.uid', page.params?.uid);
+  export const load: Load = async ({ page, fetch }) => {
+    const { data } = await queryAt('my.post.uid', page.params.uid, fetch);
 
-    return {
-      props: { data }
-    };
+    return data ? { props: { data } } : undefined;
   };
 </script>
 

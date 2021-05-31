@@ -1,5 +1,5 @@
 <script>
-  import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+  import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
   import Anchor from './Anchor.svelte';
 </script>
 

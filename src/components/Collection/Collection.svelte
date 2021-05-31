@@ -1,10 +1,10 @@
 <script>
   import { goto, prefetch } from '$app/navigation';
+  import Anchor from '$src/components/Anchor/Anchor.svelte';
+  import SectionHeader from '$src/components/SectionHeader/SectionHeader.svelte';
+  import { prismicImg, resolveDocument } from '$src/lib/prismic';
+  import type { Photo } from '$types/_generated/prismic';
   import imgix from 'svelte-imgix';
-  import type { Photo } from '../../../@types/_generated/prismic';
-  import { prismicImg, resolveDocument } from '../../lib/prismic';
-  import Anchor from '../Anchor/Anchor.svelte';
-  import SectionHeader from '../SectionHeader/SectionHeader.svelte';
 
   /** Name of the collection */
   export let name: string;

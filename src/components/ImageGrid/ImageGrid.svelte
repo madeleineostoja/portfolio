@@ -1,10 +1,6 @@
 <script>
-  import type { PrismicImg } from '@types/prismic';
+  import type { PrismicImg } from '$src/lib/prismic/types';
   import Gallery from 'svelte-gallery';
-  import { placeholder, srcset } from 'svelte-imgix';
-  import { onMount } from 'svelte';
-  import { customMedia } from '../../styles/breakpoints.json';
-  import { media } from '../../lib/stores';
   import ImageGridImg from './ImageGridImg.svelte';
 
   export let images: PrismicImg[] = [];

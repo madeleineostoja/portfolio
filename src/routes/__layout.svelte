@@ -1,18 +1,21 @@
 <script>
+  import { browser } from '$app/env';
   import { prefetchRoutes } from '$app/navigation';
   import { navigating } from '$app/stores';
-  import { onMount } from 'svelte';
+  import LoadingBar from '$src/components/LoadingBar/LoadingBar.svelte';
+  import { SITE_URL } from '$src/lib/consts';
+  import '$src/styles';
   import Meta from 'svelte-meta';
-  import LoadingBar from '../components/LoadingBar/LoadingBar.svelte';
-  import { SITE_URL } from '../lib/consts';
-  import '../styles';
 
-  onMount(async () => {
-    const Fullstory = await import('@fullstory/browser');
+  // async function initFullstory() {
+  //   const Fullstory = await import('@fullstory/browser');
+  //   Fullstory.init({ orgId: '130YX8 ' });
+  // }
 
-    prefetchRoutes();
-    Fullstory.init({ orgId: '130YX8 ' });
-  });
+  // if (browser) {
+  //   initFullstory();
+  //   prefetchRoutes();
+  // }
 </script>
 
 <style>

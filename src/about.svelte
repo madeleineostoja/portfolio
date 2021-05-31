@@ -1,22 +1,19 @@
 <script context="module">
+  import Anchor from '$src/components/Anchor/Anchor.svelte';
+  import Footer from '$src/components/Footer/Footer.svelte';
+  import Header from '$src/components/Header/Header.svelte';
+  import ImageGrid from '$src/components/ImageGrid/ImageGrid.svelte';
+  import SectionHeader from '$src/components/SectionHeader/SectionHeader.svelte';
+  import { plaintext, prismicImg, queryAt, richtext } from '$src/lib/prismic';
+  import { customMedia } from '$src/styles/breakpoints.json';
+  import type { About } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
-  import imgix, { placeholder } from 'svelte-imgix';
+  import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
-  import type { About } from '../../@types/_generated/prismic';
-  import Anchor from '../components/Anchor/Anchor.svelte';
-  import Footer from '../components/Footer/Footer.svelte';
-  import Header from '../components/Header/Header.svelte';
-  import ImageGrid from '../components/ImageGrid/ImageGrid.svelte';
-  import SectionHeader from '../components/SectionHeader/SectionHeader.svelte';
-  import { plaintext, prismicImg, queryAt, richtext } from '../lib/prismic';
-  import { customMedia } from '../styles/breakpoints.json';
 
-  export const load: Load = async () => {
-    const { data } = await queryAt('document.type', 'about');
-
-    return {
-      props: { data }
-    };
+  export const load: Load = async ({ fetch }) => {
+    const { data } = await queryAt('document.type', 'about', fetch);
+    return data ? { props: { data } } : undefined;
   };
 </script>
 

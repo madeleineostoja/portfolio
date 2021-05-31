@@ -1,4 +1,4 @@
-import { timestamp, files, build } from '$service-worker';
+import { build, files, timestamp } from '$service-worker';
 
 const ASSETS = `cache${timestamp}`,
   toCache = build.concat(files),

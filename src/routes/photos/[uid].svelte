@@ -1,33 +1,39 @@
 <script context="module">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import type { Load } from '@sveltejs/kit';
-  import imgix from 'svelte-imgix';
-  import Meta from 'svelte-meta';
-  import type { Collection, Photo } from '../../../@types/_generated/prismic';
-  import link from '../../actions/link';
-  import PrevIcon from '../../assets/icons/caret-left.svelte';
-  import NextIcon from '../../assets/icons/caret-right.svelte';
-  import Anchor from '../../components/Anchor/Anchor.svelte';
-  import Button from '../../components/Button/Button.svelte';
+  import type { Collection, Photo } from '$src/../@types/_generated/prismic';
+  import PrevIcon from '$src/assets/icons/caret-left.svelte';
+  import NextIcon from '$src/assets/icons/caret-right.svelte';
+  import Anchor from '$src/components/Anchor/Anchor.svelte';
+  import Button from '$src/components/Button/Button.svelte';
   import {
     prismicImg,
     queryAt,
     resolveDocument,
     resolveLink
-  } from '../../lib/prismic';
-  import type { PrismicDocument } from '../../lib/prismic/types';
-  import { customMedia } from '../../styles/breakpoints.json';
+  } from '$src/lib/prismic';
+  import type { PrismicDocument } from '$src/lib/prismic/types';
+  import { customMedia } from '$src/styles/breakpoints.json';
+  import type { Load } from '@sveltejs/kit';
+  import imgix from 'svelte-imgix';
+  import Meta from 'svelte-meta';
 
   export const load: Load = async ({ page, fetch }) => {
-    const url = `/photos/${page.params.uid}.json`;
-    const res = await fetch(url);
+    const { uid, data } = await queryAt('my.photo.uid', page.params.uid, fetch),
+      collections = await queryAt('document.type', 'collection', fetch),
+      collection = collections.find(({ data: doc }: any) => {
+        return doc.photos.some(({ photo }: any) => photo.uid === uid);
+      });
 
-    return {
-      props: {
-        ...(await res.json())
-      }
-    };
+    return data
+      ? {
+          props: {
+            uid,
+            data,
+            collection
+          }
+        }
+      : undefined;
   };
 </script>
 
@@ -162,7 +168,7 @@
 
     <nav class="nav">
       {#if !firstPhoto}
-        <a use:link class="navIcon" href={previousPhoto}>
+        <a sveltekit:prefetch class="navIcon" href={previousPhoto}>
           <PrevIcon />
         </a>
       {:else}
@@ -170,7 +176,7 @@
       {/if}
 
       {#if !lastPhoto}
-        <a use:link class="navIcon" href={nextPhoto}>
+        <a sveltekit:prefetch class="navIcon" href={nextPhoto}>
           <NextIcon />
         </a>
       {:else}

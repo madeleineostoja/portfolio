@@ -1,9 +1,9 @@
 <script>
-  import InstagramIcon from '../../assets/icons/instagram.svelte';
-  import MailIcon from '../../assets/icons/mail.svelte';
-  import TwitterIcon from '../../assets/icons/twitter.svelte';
-  import link from '../../actions/link';
-  import { ICON_PROPS } from '../../lib/consts';
+  import link from '$src/actions/link';
+  import InstagramIcon from '$src/assets/icons/instagram.svelte';
+  import MailIcon from '$src/assets/icons/mail.svelte';
+  import TwitterIcon from '$src/assets/icons/twitter.svelte';
+  import { ICON_PROPS } from '$src/lib/consts';
 </script>
 
 <style>

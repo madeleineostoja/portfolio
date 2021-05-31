@@ -1,14 +1,14 @@
 <script context="module">
+  import Collection from '$src/components/Collection/Collection.svelte';
+  import Footer from '$src/components/Footer/Footer.svelte';
+  import Header from '$src/components/Header/Header.svelte';
+  import { plaintext, queryAt, resolveDocument } from '$src/lib/prismic';
+  import type { Home } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import Meta from 'svelte-meta';
-  import type { Home } from '../../@types/_generated/prismic';
-  import Collection from '../components/Collection/Collection.svelte';
-  import Footer from '../components/Footer/Footer.svelte';
-  import Header from '../components/Header/Header.svelte';
-  import { plaintext, queryAt, resolveDocument } from '../lib/prismic';
 
-  export const load: Load = async () => {
-    const { data } = await queryAt('document.type', 'home', {
+  export const load: Load = async ({ fetch }) => {
+    const { data } = await queryAt('document.type', 'home', fetch, {
       fetchLinks: [
         'collection.name',
         'collection.photos',
@@ -18,11 +18,7 @@
       ]
     });
 
-    return {
-      props: {
-        data
-      }
-    };
+    return data ? { props: { data } } : undefined;
   };
 </script>
 
