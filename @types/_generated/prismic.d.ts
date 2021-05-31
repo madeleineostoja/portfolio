@@ -111,7 +111,7 @@ export type BlogConnectionEdge = {
 export type Collection = _Document &
   _Linkable & {
     __typename?: 'Collection';
-    name?: Maybe<Scalars['Json']>;
+    name?: Maybe<Scalars['String']>;
     photos?: Maybe<Array<CollectionPhotos>>;
     meta_title?: Maybe<Scalars['String']>;
     meta_description?: Maybe<Scalars['String']>;
@@ -142,6 +142,38 @@ export type CollectionConnectionEdge = {
 export type CollectionPhotos = {
   __typename?: 'CollectionPhotos';
   photo?: Maybe<_Linkable>;
+};
+
+export type Global = _Document &
+  _Linkable & {
+    __typename?: 'Global';
+    collections?: Maybe<Array<GlobalCollections>>;
+    _meta: Meta;
+    _linkType?: Maybe<Scalars['String']>;
+  };
+
+export type GlobalCollections = {
+  __typename?: 'GlobalCollections';
+  collection?: Maybe<_Linkable>;
+};
+
+/** A connection to a list of items. */
+export type GlobalConnectionConnection = {
+  __typename?: 'GlobalConnectionConnection';
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<GlobalConnectionEdge>>>;
+  totalCount: Scalars['Long'];
+};
+
+/** An edge in a connection. */
+export type GlobalConnectionEdge = {
+  __typename?: 'GlobalConnectionEdge';
+  /** The item at the end of the edge. */
+  node: Global;
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
 };
 
 export type Home = _Document &
@@ -310,6 +342,7 @@ export type Query = {
   allPhotos: PhotoConnectionConnection;
   home?: Maybe<Home>;
   allHomes: HomeConnectionConnection;
+  allGlobals: GlobalConnectionConnection;
   allBlogs: BlogConnectionConnection;
   about?: Maybe<About>;
   allAbouts: AboutConnectionConnection;
@@ -464,6 +497,31 @@ export type QueryAllHomesArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+export type QueryAllGlobalsArgs = {
+  sortBy?: Maybe<SortGlobaly>;
+  id?: Maybe<Scalars['String']>;
+  id_in?: Maybe<Array<Scalars['String']>>;
+  uid?: Maybe<Scalars['String']>;
+  uid_in?: Maybe<Array<Scalars['String']>>;
+  lang?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Scalars['String']>>;
+  tags_in?: Maybe<Array<Scalars['String']>>;
+  type?: Maybe<Scalars['String']>;
+  type_in?: Maybe<Array<Scalars['String']>>;
+  firstPublicationDate?: Maybe<Scalars['DateTime']>;
+  firstPublicationDate_after?: Maybe<Scalars['DateTime']>;
+  firstPublicationDate_before?: Maybe<Scalars['DateTime']>;
+  lastPublicationDate?: Maybe<Scalars['DateTime']>;
+  lastPublicationDate_after?: Maybe<Scalars['DateTime']>;
+  lastPublicationDate_before?: Maybe<Scalars['DateTime']>;
+  fulltext?: Maybe<Scalars['String']>;
+  similar?: Maybe<Similar>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type QueryAllBlogsArgs = {
   sortBy?: Maybe<SortBlogy>;
   id?: Maybe<Scalars['String']>;
@@ -579,6 +637,13 @@ export enum SortDocumentsBy {
   MetaLastPublicationDateDesc = 'meta_lastPublicationDate_DESC'
 }
 
+export enum SortGlobaly {
+  MetaFirstPublicationDateAsc = 'meta_firstPublicationDate_ASC',
+  MetaFirstPublicationDateDesc = 'meta_firstPublicationDate_DESC',
+  MetaLastPublicationDateAsc = 'meta_lastPublicationDate_ASC',
+  MetaLastPublicationDateDesc = 'meta_lastPublicationDate_DESC'
+}
+
 export enum SortHomey {
   MetaFirstPublicationDateAsc = 'meta_firstPublicationDate_ASC',
   MetaFirstPublicationDateDesc = 'meta_firstPublicationDate_DESC',
@@ -633,7 +698,7 @@ export type WhereBlog = {
 };
 
 export type WhereCollection = {
-  /** name */
+  name?: Maybe<Scalars['String']>;
   name_fulltext?: Maybe<Scalars['String']>;
   meta_title?: Maybe<Scalars['String']>;
   meta_title_fulltext?: Maybe<Scalars['String']>;

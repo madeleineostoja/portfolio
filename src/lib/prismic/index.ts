@@ -5,6 +5,21 @@ import * as prismic from 'ts-prismic';
 import { PRISMIC_REPO } from '../consts';
 import type { PrismicImg } from './types';
 
+export const maxage = 300;
+
+const routes = (uid: string) => ({
+  home: '/',
+  collection: `/collections/${uid}`,
+  photo: `/photos/${uid}`,
+  default: `/${uid}`
+});
+
+const htmlElements = (element?: any, content?: any, children?: any) => ({
+  heading2: /* html */ `
+    <h2 class="typeset-heading2" style="margin-top: 2em;">${children}</h2>
+  `
+});
+
 /** Init Prismic API */
 const ref = (async () => {
   const endpoint = prismic.defaultEndpoint(PRISMIC_REPO),
@@ -15,21 +30,6 @@ const ref = (async () => {
 
   return ref;
 })();
-
-/** Route resolving */
-const routes = (uid: string) => ({
-  home: '/',
-  collection: `/collections/${uid}`,
-  photo: `/photos/${uid}`,
-  default: `/${uid}`
-});
-
-/** Richtext HTML parser */
-const htmlElements = (element?: any, content?: any, children?: any) => ({
-  heading2: /* html */ `
-    <h2 class="typeset-heading2" style="margin-top: 2em;">${children}</h2>
-  `
-});
 
 /** Queries */
 export async function query(

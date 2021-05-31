@@ -37,9 +37,6 @@
 
 <Header />
 
-<!-- <SectionHeader title={plaintext(data.name)} large>
-  <Button slot="action" back href="/">Back</Button></SectionHeader
-> -->
 <Gallery
   gutter={$media['--tablet'] ? 32 : 16}
   images={data.photos
@@ -49,7 +46,7 @@
         return {
           uid: photo?.uid,
           src: url,
-          sizes: `${customMedia['--tablet']} 33vw, ${customMedia['--mobile']} 50vw, 100vw`,
+          sizes: `${customMedia['--tablet']} 50vw, 100vw`,
           alt: photo?.data.title,
           ...dimensions
         };

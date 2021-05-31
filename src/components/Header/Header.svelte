@@ -7,22 +7,13 @@
   import Hamburger from 'svelte-hamburger';
   import { fade } from 'svelte/transition';
   import { ICON_PROPS } from '$src/lib/consts';
+  import { globalData } from '$src/lib/stores';
 
   const NAVS = {
-    collections: [
-      {
-        href: resolveDocument({ type: 'collection', uid: 'urban-landscape' }),
-        label: 'Urban Landscape'
-      },
-      {
-        href: resolveDocument({ type: 'collection', uid: 'the-streets' }),
-        label: 'Street'
-      },
-      {
-        href: resolveDocument({ type: 'collection', uid: 'people' }),
-        label: 'People'
-      }
-    ],
+    collections: $globalData?.collections!.map(({ collection }) => ({
+      href: resolveDocument(collection),
+      label: (collection as any)?.data.name
+    })),
     site: [
       { href: '/about', label: 'About' },
       { href: 'https://madi.darkroom.tech', label: 'Prints' }
@@ -40,16 +31,17 @@
   header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-bottom: var(--spacing-6);
     @media (--tablet) {
       margin-bottom: var(--spacing-7);
     }
   }
 
-  .mast {
-    display: flex;
-    align-items: center;
+  @media (--tablet) {
+    .mast {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .logo {
@@ -62,14 +54,19 @@
   }
 
   .nav {
-    display: none;
+    display: flex;
     align-items: center;
-
     & > *:not(:last-of-type) {
       margin-right: 1rem;
     }
-    @media (--tablet) {
-      display: flex;
+  }
+
+  @media not all and (--tablet) {
+    .collections {
+      margin-top: 2rem;
+    }
+    .siteNav {
+      display: none;
     }
   }
 
@@ -108,17 +105,6 @@
     }
   }
 
-  .mobNavHeading {
-    margin-bottom: 0.5em;
-    padding-bottom: 0.5em;
-  }
-
-  .mobNav--collections {
-    margin-bottom: var(--spacing-3);
-    padding-bottom: var(--spacing-2);
-    border-bottom: 1px solid var(--color-grey-300);
-  }
-
   .mobSocials {
     display: flex;
     align-items: center;
@@ -133,16 +119,14 @@
 
 <header class="typeset-ui {$$props.class}">
   <div class="mast">
-    <a use:link href="/">
-      <h1 class="logo">Madeleine Ostoja</h1>
-    </a>
-    <nav class="nav">
+    <h1 class="logo">Madeleine Ostoja</h1>
+    <nav class="nav collections">
       {#each NAVS.collections as { href, label }}
-        <a use:link use:active class="navLink" {href}>{label}</a>
+        <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a>
       {/each}
     </nav>
   </div>
-  <nav class="nav">
+  <nav class="nav siteNav">
     {#each NAVS.site as { href, label }}
       <a use:link use:active class="navLink" {href}>{label}</a>
     {/each}
@@ -154,34 +138,19 @@
 
 {#if mobNavOpen}
   <div class="mobMenu pageGrid" transition:fade={{ duration: 150 }}>
-    <div>
-      <nav class="mobNav mobNav--collections">
-        {#each NAVS.collections as { href, label }}
-          <a
-            use:link
-            use:active
-            class="navLink typeset-h2"
-            on:click={closeMenu}
-            {href}
-          >
-            {label}
-          </a>
-        {/each}
-      </nav>
-      <nav class="mobNav">
-        {#each NAVS.site as { href, label }}
-          <a
-            use:link
-            use:active
-            class="navLink typeset-h2"
-            on:click={closeMenu}
-            {href}
-          >
-            {label}
-          </a>
-        {/each}
-      </nav>
-    </div>
+    <nav class="mobNav">
+      {#each NAVS.site as { href, label }}
+        <a
+          use:link
+          use:active
+          class="navLink typeset-h2"
+          on:click={closeMenu}
+          {href}
+        >
+          {label}
+        </a>
+      {/each}
+    </nav>
     <div class="mobSocials">
       <a
         use:link

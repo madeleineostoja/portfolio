@@ -1,11 +1,26 @@
-<script>
+<script context="module">
   import { browser } from '$app/env';
   import { prefetchRoutes } from '$app/navigation';
-  import { navigating } from '$app/stores';
-  import LoadingBar from '$src/components/LoadingBar/LoadingBar.svelte';
   import { SITE_URL } from '$src/lib/consts';
+  import { maxage, queryAt } from '$src/lib/prismic';
+  import { globalData } from '$src/lib/stores';
   import '$src/styles';
+  import type { Global } from '$types/_generated/prismic';
+  import type { Load } from '@sveltejs/kit';
   import Meta from 'svelte-meta';
+
+  export const load: Load = async ({ fetch }) => {
+    const { data } = await queryAt('document.type', 'global', fetch, {
+      fetchLinks: 'collection.name'
+    });
+
+    return !!data ? { props: { data }, maxage } : undefined;
+  };
+</script>
+
+<script>
+  export let data: Global;
+  globalData.set(data);
 
   async function initFullstory() {
     const Fullstory = await import('@fullstory/browser');
@@ -50,7 +65,6 @@
   }}
 />
 
-<LoadingBar loading={!!$navigating} duration="2s" delay="300ms" />
 <main class="grid">
   <div class="grid content">
     <slot />
