@@ -1,7 +1,6 @@
 <script context="module">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import swipe from '$src/actions/swipe';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
   import Anchor from '$src/components/Anchor/Anchor.svelte';
@@ -14,11 +13,14 @@
     resolveLink
   } from '$src/lib/prismic';
   import type { PrismicDocument } from '$src/lib/prismic/types';
+  import { media } from '$src/lib/stores';
   import { customMedia } from '$src/styles/breakpoints.json';
   import type { Collection, Photo } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
+  import { onMount } from 'svelte';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
+  import Swipe from 'swipe-listener';
 
   export const load: Load = async ({ page, fetch }) => {
     const { uid, data } = await queryAt('my.photo.uid', page.params.uid, fetch),
@@ -41,13 +43,9 @@
 </script>
 
 <script>
-  import { media } from '$src/lib/stores';
-
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
-
-  $: current = photos?.findIndex(({ photo }: any) => photo?.uid === uid) || 0;
 
   const { photos } = collection.data as any,
     ref = $page.query.get('ref'),
@@ -56,6 +54,9 @@
         ref ? `?ref=${ref}` : ''
       }`;
 
+  let photo: HTMLImageElement;
+
+  $: current = photos?.findIndex(({ photo }: any) => photo?.uid === uid) || 0;
   $: firstPhoto = current === 0;
   $: lastPhoto = current === photos.length - 1;
   $: previousPhoto = !firstPhoto ? getPhotoHref(current - 1) : '';
@@ -84,12 +85,18 @@
       !lastPhoto && goto(nextPhoto);
     }
   }
+
+  onMount(() => {
+    const listener = Swipe(photo);
+    return () => listener.off();
+  });
 </script>
 
 <style>
   .page {
     grid-auto-flow: dense;
     grid-template-rows: auto auto 1fr;
+    min-height: 75vh;
     @media (--laptop) {
       min-height: calc(100vh - var(--spacing-3) - var(--spacing-3));
       grid-template-rows: auto 1fr;
@@ -156,11 +163,14 @@
     }
   }
 
-  .navIcon :global(svg) {
-    fill: currentColor;
-    height: var(--scale-1);
-    width: var(--scale-1);
-    cursor: pointer;
+  .navIcon {
+    padding: 6px;
+    & :global(svg) {
+      fill: currentColor;
+      height: var(--scale-1);
+      width: var(--scale-1);
+      cursor: pointer;
+    }
   }
 </style>
 
@@ -192,8 +202,8 @@
     <div>
       <img
         class="photo"
+        bind:this={photo}
         use:imgix={data.photo.url}
-        use:swipe
         on:swipe={handleImgSwipe}
         {...prismicImg(data.photo)}
         sizes="{customMedia['--tablet']} 50vw, 100vw"

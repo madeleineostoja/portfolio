@@ -3,13 +3,13 @@
   import InstagramIcon from '$src/assets/icons/instagram.svelte';
   import MailIcon from '$src/assets/icons/mail.svelte';
   import TwitterIcon from '$src/assets/icons/twitter.svelte';
-  import { resolveDocument } from '$src/lib/prismic';
-  import Hamburger from 'svelte-hamburger';
-  import { fade } from 'svelte/transition';
   import { ICON_PROPS } from '$src/lib/consts';
-  import { globalData } from '$src/lib/stores';
+  import { resolveDocument } from '$src/lib/prismic';
+  import { globalData, media } from '$src/lib/stores';
   import Headroom from 'headroom.js';
   import { onMount } from 'svelte';
+  import Hamburger from 'svelte-hamburger';
+  import { fade } from 'svelte/transition';
 
   const NAVS = {
     collections: $globalData?.collections!.map(({ collection }) => ({
@@ -59,7 +59,9 @@
     padding: var(--spacing-2) 0;
     background: white;
     transition: transform 300ms ease;
-    transform: translateY(var(--spacing-1));
+    @media (--mobile) {
+      transform: translateY(var(--spacing-1));
+    }
     &:global(.headroom--not-top) {
       transform: translateY(0);
     }
@@ -73,8 +75,8 @@
     justify-content: space-between;
   }
 
-  @media (--tablet) {
-    .mast {
+  .mast {
+    @media (--tablet) {
       display: flex;
       align-items: center;
     }
@@ -90,6 +92,7 @@
   }
 
   .nav {
+    transition: opacity 200ms ease;
     display: flex;
     align-items: center;
     & > *:not(:last-of-type) {
@@ -120,7 +123,6 @@
   }
 
   .hamburger {
-    z-index: var(--layer-top);
     cursor: pointer;
     @media (--tablet) {
       display: none;
@@ -133,10 +135,11 @@
     left: 0;
     height: 100%;
     width: 100%;
-    padding-top: var(--spacing-5);
+    padding-top: var(--spacing-7);
     align: space-between;
     background: white;
     z-index: var(--layer-5);
+    grid-auto-rows: auto;
   }
 
   .mobNav {
@@ -168,11 +171,19 @@
     <div class="inner" bind:clientHeight={headerHeight}>
       <div class="mast">
         <h1 class="logo">Madeleine Ostoja</h1>
+        <!-- {#if !mobNavOpen} -->
         <nav class="nav collections">
           {#each NAVS.collections as { href, label }}
-            <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a>
+            <a
+              sveltekit:prefetch
+              use:active
+              on:click={closeMenu}
+              class="navLink"
+              {href}>{label}</a
+            >
           {/each}
         </nav>
+        <!-- {/if} -->
       </div>
       <nav class="nav siteNav">
         {#each NAVS.site as { href, label }}
@@ -181,6 +192,8 @@
       </nav>
       <div class="hamburger">
         <Hamburger
+          width={$media['--mobile'] ? 30 : 24}
+          height={$media['--mobile'] ? 24 : 20}
           open={mobNavOpen}
           on:click={() => (mobNavOpen = !mobNavOpen)}
         />
@@ -190,7 +203,7 @@
 </div>
 
 {#if mobNavOpen}
-  <div class="mobMenu pageGrid" transition:fade={{ duration: 150 }}>
+  <div class="mobMenu pageGrid" transition:fade={{ duration: 200 }}>
     <nav class="mobNav">
       {#each NAVS.site as { href, label }}
         <a

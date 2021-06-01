@@ -41,7 +41,10 @@
     grid-auto-rows: min-content;
     align-items: start;
     min-height: 100%;
-    padding: var(--spacing-3) 0;
+    padding: var(--spacing-2) 0 var(--spacing-3);
+    @media (--mobile) {
+      padding: var(--spacing-3) 0;
+    }
     & > :global(*) {
       grid-column: 2 / 3;
     }
