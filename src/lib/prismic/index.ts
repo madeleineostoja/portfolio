@@ -1,5 +1,4 @@
 import PrismicDOM from 'prismic-dom';
-import type { QueryOptions } from 'prismic-javascript/types/ResolvedApi';
 import { placeholder } from 'svelte-imgix';
 import * as prismic from 'ts-prismic';
 import { PRISMIC_REPO } from '../consts';
@@ -63,7 +62,7 @@ export function queryAt(
   path: string,
   value: string,
   fetcher: any,
-  options?: QueryOptions
+  options?: prismic.QueryParams
 ) {
   return query((prismic) => prismic.at(path, value), fetcher, options);
 }

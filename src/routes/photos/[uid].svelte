@@ -1,20 +1,20 @@
 <script context="module">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
-  import type { Collection, Photo } from '$types/_generated/prismic';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
   import Anchor from '$src/components/Anchor/Anchor.svelte';
   import Button from '$src/components/Button/Button.svelte';
   import {
+    maxage,
     prismicImg,
     queryAt,
     resolveDocument,
     resolveLink
   } from '$src/lib/prismic';
   import type { PrismicDocument } from '$src/lib/prismic/types';
-  import { returnProps } from '$src/lib/utils';
   import { customMedia } from '$src/styles/breakpoints.json';
+  import type { Collection, Photo } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import imgix from 'svelte-imgix';
   import Meta from 'svelte-meta';
@@ -26,11 +26,16 @@
         return doc.photos.some(({ photo }: any) => photo.uid === uid);
       });
 
-    return returnProps({
-      uid,
-      data,
-      collection
-    });
+    return !!data
+      ? {
+          props: {
+            uid,
+            data,
+            collection
+          },
+          maxage
+        }
+      : undefined;
   };
 </script>
 

@@ -2,9 +2,8 @@
   import Footer from '$src/components/Footer/Footer.svelte';
   import GalleryImage from '$src/components/GalleryImage/GalleryImage.svelte';
   import Header from '$src/components/Header/Header.svelte';
-  import { queryAt } from '$src/lib/prismic';
+  import { maxage, queryAt } from '$src/lib/prismic';
   import { media } from '$src/lib/stores';
-  import { returnProps } from '$src/lib/utils';
   import { customMedia } from '$src/styles/breakpoints.json';
   import type { Collection } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
@@ -21,7 +20,7 @@
       }
     );
 
-    return returnProps({ data });
+    return !!data ? { props: { data }, maxage } : undefined;
   };
 </script>
 

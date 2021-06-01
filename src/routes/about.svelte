@@ -4,8 +4,13 @@
   import Header from '$src/components/Header/Header.svelte';
   import ImageGrid from '$src/components/ImageGrid/ImageGrid.svelte';
   import SectionHeader from '$src/components/SectionHeader/SectionHeader.svelte';
-  import { plaintext, prismicImg, queryAt, richtext } from '$src/lib/prismic';
-  import { returnProps } from '$src/lib/utils';
+  import {
+    maxage,
+    plaintext,
+    prismicImg,
+    queryAt,
+    richtext
+  } from '$src/lib/prismic';
   import { customMedia } from '$src/styles/breakpoints.json';
   import type { About } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
@@ -14,7 +19,7 @@
 
   export const load: Load = async ({ fetch }) => {
     const { data } = await queryAt('document.type', 'about', fetch);
-    return returnProps({ data });
+    return !!data ? { props: { data }, maxage } : undefined;
   };
 </script>
 

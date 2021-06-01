@@ -2,16 +2,14 @@
   import Footer from '$src/components/Footer/Footer.svelte';
   import Header from '$src/components/Header/Header.svelte';
   import ImageGrid from '$src/components/ImageGrid/ImageGrid.svelte';
-  import { plaintext, queryAt, richtext } from '$src/lib/prismic';
-  import { returnProps } from '$src/lib/utils';
+  import { maxage, plaintext, queryAt, richtext } from '$src/lib/prismic';
   import type { Post } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import Meta from 'svelte-meta';
 
   export const load: Load = async ({ page, fetch }) => {
     const { data } = await queryAt('my.post.uid', page.params.uid, fetch);
-
-    return returnProps({ data });
+    return !!data ? { props: { data }, maxage } : undefined;
   };
 </script>
 
