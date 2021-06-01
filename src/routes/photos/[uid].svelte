@@ -1,6 +1,7 @@
 <script context="module">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
+  import swipe from '$src/actions/swipe';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
   import Anchor from '$src/components/Anchor/Anchor.svelte';
@@ -69,6 +70,16 @@
       case 'ArrowRight':
         current !== photos.length - 1 && goto(nextPhoto);
         break;
+    }
+  }
+
+  function handleImgSwipe(e: Event) {
+    const { left, right } = e.detail.directions;
+
+    if (right) {
+      !firstPhoto && goto(previousPhoto);
+    } else if (left) {
+      !lastPhoto && goto(nextPhoto);
     }
   }
 </script>
@@ -163,6 +174,8 @@
     <img
       class="photo"
       use:imgix={data.photo.url}
+      use:swipe
+      on:swipe={handleImgSwipe}
       {...prismicImg(data.photo)}
       sizes="{customMedia['--tablet']} 50vw, 100vw"
       alt={data.title}

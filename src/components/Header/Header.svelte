@@ -73,9 +73,13 @@
   .navLink {
     color: var(--color-text-secondary);
     transition: color 150ms ease;
-    &:hover,
     &:global(.active) {
       color: var(--color-text);
+    }
+    @media (--mobile) {
+      &:hover {
+        color: var(--color-text);
+      }
     }
   }
 

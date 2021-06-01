@@ -1,5 +1,6 @@
 <script>
   import type { PrismicImg } from '$src/lib/prismic/types';
+  import { media } from '$src/lib/stores';
   import Gallery from 'svelte-gallery';
   import ImageGridImg from './ImageGridImg.svelte';
 
@@ -18,7 +19,7 @@
 
 <div class="images {$$props.class}">
   <Gallery
-    gutter={16}
+    gutter={$media['--tablet'] ? 16 : 8}
     images={images.map(({ dimensions, url, alt }) => ({
       src: url,
       sizes,
