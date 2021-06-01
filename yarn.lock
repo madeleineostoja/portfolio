@@ -2405,13 +2405,6 @@
   resolved "https://registry.yarnpkg.com/@sveltejs/adapter-static/-/adapter-static-1.0.0-next.12.tgz#89b584ba76805e1fc46639843f5bf65cc8af978d"
   integrity sha512-7ksxa/Hepx+5nFaUiU9lCjPFVYZ9Iy6wd3KexAJe0/q+VxEx7TmAn/fNrmgRqZwQFHrPikvZ7Cx9pyeIykdyVg==
 
-"@sveltejs/adapter-vercel@^1.0.0-next.20":
-  version "1.0.0-next.20"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.20.tgz#36079b137fec899e0064951415ca50d596029c43"
-  integrity sha512-cSGFym8Ap13p1uMBG3YQyy2Ut0eIjIjbRMtngGLUxi1guSkt1yoHytoW41O0koinrN43paKsym6Q5pO8tfX+Hg==
-  dependencies:
-    esbuild "^0.11.18"
-
 "@sveltejs/kit@next":
   version "1.0.0-next.111"
   resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.111.tgz#1fa6a9e2acc7b88f812720efde22474f814782c5"
@@ -5250,7 +5243,7 @@ es6-shim@^0.35.5:
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.6.tgz#d10578301a83af2de58b9eadb7c2c9945f7388a0"
   integrity sha512-EmTr31wppcaIAgblChZiuN/l9Y7DPyw8Xtbg7fIVngn6zMW+IEBJDJngeKC3x6wr0V/vcA2wqeFnaw1bFJbDdA==
 
-esbuild@^0.11.18, esbuild@^0.11.23:
+esbuild@^0.11.23:
   version "0.11.23"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.23.tgz#c42534f632e165120671d64db67883634333b4b8"
   integrity sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==
