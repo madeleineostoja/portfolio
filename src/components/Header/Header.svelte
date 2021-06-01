@@ -8,6 +8,7 @@
   import { fade } from 'svelte/transition';
   import { ICON_PROPS } from '$src/lib/consts';
   import { globalData } from '$src/lib/stores';
+  import Headroom from 'svelte-headroom';
 
   const NAVS = {
     collections: $globalData?.collections!.map(({ collection }) => ({
@@ -21,6 +22,8 @@
   };
 
   let mobNavOpen = false;
+  let scroll = 0;
+  let headerHeight = 18;
 
   function closeMenu() {
     mobNavOpen = false;
@@ -28,13 +31,29 @@
 </script>
 
 <style>
-  header {
-    display: flex;
-    justify-content: space-between;
+  .spacer {
     margin-bottom: var(--spacing-6);
     @media (--tablet) {
       margin-bottom: var(--spacing-7);
     }
+  }
+
+  .wrapper {
+    z-index: var(--layer-top);
+  }
+
+  header {
+    padding: var(--spacing-2) 0;
+    background: white;
+    transition: transform 300ms ease;
+    &.top {
+      transform: translateY(var(--spacing-1));
+    }
+  }
+
+  .inner {
+    display: flex;
+    justify-content: space-between;
   }
 
   @media (--tablet) {
@@ -121,24 +140,41 @@
   }
 </style>
 
-<header class="typeset-ui {$$props.class}">
-  <div class="mast">
-    <h1 class="logo">Madeleine Ostoja</h1>
-    <nav class="nav collections">
-      {#each NAVS.collections as { href, label }}
-        <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a>
-      {/each}
-    </nav>
-  </div>
-  <nav class="nav siteNav">
-    {#each NAVS.site as { href, label }}
-      <a use:link use:active class="navLink" {href}>{label}</a>
-    {/each}
-  </nav>
-  <div class="hamburger">
-    <Hamburger open={mobNavOpen} on:click={() => (mobNavOpen = !mobNavOpen)} />
-  </div>
-</header>
+<svelte:window bind:scrollY={scroll} />
+
+<div class="spacer" style="height: {headerHeight}px" />
+
+<div class="wrapper fullbleed">
+  <Headroom duration={300}>
+    <header
+      class="pageGrid typeset-ui {$$props.class}"
+      class:top={scroll === 0}
+    >
+      <div class="inner" bind:clientHeight={headerHeight}>
+        <div class="mast">
+          <h1 class="logo">Madeleine Ostoja</h1>
+          <nav class="nav collections">
+            {#each NAVS.collections as { href, label }}
+              <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a
+              >
+            {/each}
+          </nav>
+        </div>
+        <nav class="nav siteNav">
+          {#each NAVS.site as { href, label }}
+            <a use:link use:active class="navLink" {href}>{label}</a>
+          {/each}
+        </nav>
+        <div class="hamburger">
+          <Hamburger
+            open={mobNavOpen}
+            on:click={() => (mobNavOpen = !mobNavOpen)}
+          />
+        </div>
+      </div>
+    </header>
+  </Headroom>
+</div>
 
 {#if mobNavOpen}
   <div class="mobMenu pageGrid" transition:fade={{ duration: 150 }}>

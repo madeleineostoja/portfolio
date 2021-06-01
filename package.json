@@ -47,6 +47,7 @@
     "prismic-dom": "^2.2.5",
     "svelte-gallery": "^1.3.2",
     "svelte-hamburger": "^0.1.4",
+    "svelte-headroom": "^2.2.1",
     "svelte-imgix": "^2.4.1",
     "svelte-media": "^0.1.4",
     "svelte-meta": "^1.0.2",

@@ -11091,6 +11091,11 @@ svelte-hamburger@^0.1.4:
   resolved "https://registry.yarnpkg.com/svelte-hamburger/-/svelte-hamburger-0.1.4.tgz#5f0239fc8fd235a7617a4cf3f742b6975846b353"
   integrity sha512-h5tlfKkzdgWcElwNY2U5sYCu29ZxpjAZ6bnh4NEaekqid98zOh3YJFwAvjjc518rywLGCeuTRMgoP1VpG8De0A==
 
+svelte-headroom@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/svelte-headroom/-/svelte-headroom-2.2.1.tgz#64e61a30b6c1689a4a74c8c5e4e91a260f48c84b"
+  integrity sha512-A9bhw6gIuA0a03LdCmQZsGaXzs+tapL8ugpXFLYFv933C5OJ+bkBiawOG/TJmLIKlQFzQPmmcJtQDzGSrrbVoA==
+
 svelte-hmr@^0.14.2:
   version "0.14.4"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.4.tgz#b7ef2bfeef23916e0e912828c50645ca572ac355"
