@@ -8,7 +8,8 @@
   import { fade } from 'svelte/transition';
   import { ICON_PROPS } from '$src/lib/consts';
   import { globalData } from '$src/lib/stores';
-  import Headroom from 'svelte-headroom';
+  import Headroom from 'headroom.js';
+  import { onMount } from 'svelte';
 
   const NAVS = {
     collections: $globalData?.collections!.map(({ collection }) => ({
@@ -22,12 +23,18 @@
   };
 
   let mobNavOpen = false;
-  let scroll = 0;
+  let header: HTMLElement;
+  let top = true;
   let headerHeight = 18;
 
   function closeMenu() {
     mobNavOpen = false;
   }
+
+  onMount(() => {
+    const headroom = new Headroom(header);
+    headroom.init();
+  });
 </script>
 
 <style>
@@ -46,11 +53,18 @@
   }
 
   header {
+    position: fixed;
+    width: 100%;
+    top: 0;
     padding: var(--spacing-2) 0;
     background: white;
     transition: transform 300ms ease;
-    &.top {
-      transform: translateY(var(--spacing-1));
+    transform: translateY(var(--spacing-1));
+    &:global(.headroom--not-top) {
+      transform: translateY(0);
+    }
+    &:global(.headroom--unpinned) {
+      transform: translateY(-100%);
     }
   }
 
@@ -143,40 +157,36 @@
   }
 </style>
 
-<svelte:window bind:scrollY={scroll} />
-
 <div class="spacer" style="height: {headerHeight}px" />
 
 <div class="wrapper fullbleed">
-  <Headroom duration={300}>
-    <header
-      class="pageGrid typeset-ui {$$props.class}"
-      class:top={scroll === 0}
-    >
-      <div class="inner" bind:clientHeight={headerHeight}>
-        <div class="mast">
-          <h1 class="logo">Madeleine Ostoja</h1>
-          <nav class="nav collections">
-            {#each NAVS.collections as { href, label }}
-              <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a
-              >
-            {/each}
-          </nav>
-        </div>
-        <nav class="nav siteNav">
-          {#each NAVS.site as { href, label }}
-            <a use:link use:active class="navLink" {href}>{label}</a>
+  <header
+    class="pageGrid typeset-ui {$$props.class}"
+    class:top
+    bind:this={header}
+  >
+    <div class="inner" bind:clientHeight={headerHeight}>
+      <div class="mast">
+        <h1 class="logo">Madeleine Ostoja</h1>
+        <nav class="nav collections">
+          {#each NAVS.collections as { href, label }}
+            <a sveltekit:prefetch use:active class="navLink" {href}>{label}</a>
           {/each}
         </nav>
-        <div class="hamburger">
-          <Hamburger
-            open={mobNavOpen}
-            on:click={() => (mobNavOpen = !mobNavOpen)}
-          />
-        </div>
       </div>
-    </header>
-  </Headroom>
+      <nav class="nav siteNav">
+        {#each NAVS.site as { href, label }}
+          <a use:link use:active class="navLink" {href}>{label}</a>
+        {/each}
+      </nav>
+      <div class="hamburger">
+        <Hamburger
+          open={mobNavOpen}
+          on:click={() => (mobNavOpen = !mobNavOpen)}
+        />
+      </div>
+    </div>
+  </header>
 </div>
 
 {#if mobNavOpen}

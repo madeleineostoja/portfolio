@@ -89,9 +89,9 @@
 <style>
   .page {
     grid-auto-flow: dense;
-    min-height: calc(100vh - var(--spacing-3) - var(--spacing-3));
     grid-template-rows: auto auto 1fr;
     @media (--laptop) {
+      min-height: calc(100vh - var(--spacing-3) - var(--spacing-3));
       grid-template-rows: auto 1fr;
     }
   }
@@ -99,7 +99,7 @@
   .header {
     grid-column: 1 / -1;
     text-align: right;
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-1);
     @media (--mobile) {
       margin-bottom: var(--spacing-3);
     }
@@ -150,7 +150,10 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-top: var(--spacing-3);
+    margin-top: var(--spacing-2);
+    @media (--mobile) {
+      margin-top: var(--spacing-3);
+    }
   }
 
   .navIcon :global(svg) {
