@@ -41,6 +41,8 @@
 </script>
 
 <script>
+  import { media } from '$src/lib/stores';
+
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
@@ -88,7 +90,10 @@
   .page {
     grid-auto-flow: dense;
     min-height: calc(100vh - var(--spacing-3) - var(--spacing-3));
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    @media (--laptop) {
+      grid-template-rows: auto 1fr;
+    }
   }
 
   .header {
@@ -103,17 +108,17 @@
     grid-column: 1 / -1;
     justify-content: space-between;
     @media (--tablet) {
-      grid-column: 1 / 8;
+      grid-column: 2 / 12;
     }
     @media (--laptop) {
-      grid-column-start: 2;
+      grid-column: 1 / 8;
     }
   }
 
   .photo {
     object-fit: contain;
     object-position: center top;
-    @media (--tablet) {
+    @media (--laptop) {
       max-height: 71vh;
     }
   }
@@ -122,15 +127,20 @@
     grid-column: 1 / -1;
     margin-bottom: var(--spacing-2);
     @media (--tablet) {
-      grid-column: 9 / -1;
+      grid-column: 2 / 12;
     }
     @media (--laptop) {
-      grid-column-end: 12;
+      grid-column: 9 / -1;
     }
   }
 
   .description {
     color: var(--color-text-secondary);
+    margin-top: var(--spacing-2);
+    @media (--laptop) {
+      margin-top: 1em;
+      max-width: var(--measure-narrow);
+    }
   }
 
   .nav {
@@ -163,23 +173,36 @@
 
   <div class="details">
     <h1 class="typeset-h1">{data.title}</h1>
-    <p class="description">
-      {`Captured on ${data.film} film, with the ${data.camera} camera`}
-    </p>
-    {#if data.store_link.url}
-      <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
+    {#if $media['--mobile']}
+      <p class="description">
+        {`Captured on ${data.film} film, with the ${data.camera} camera`}
+      </p>
+      {#if data.store_link.url}
+        <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
+      {/if}
     {/if}
   </div>
   <div class="frame">
-    <img
-      class="photo"
-      use:imgix={data.photo.url}
-      use:swipe
-      on:swipe={handleImgSwipe}
-      {...prismicImg(data.photo)}
-      sizes="{customMedia['--tablet']} 50vw, 100vw"
-      alt={data.title}
-    />
+    <div>
+      <img
+        class="photo"
+        use:imgix={data.photo.url}
+        use:swipe
+        on:swipe={handleImgSwipe}
+        {...prismicImg(data.photo)}
+        sizes="{customMedia['--tablet']} 50vw, 100vw"
+        alt={data.title}
+      />
+
+      {#if !$media['--mobile']}
+        <p class="description">
+          {`Captured on ${data.film} film, with the ${data.camera} camera`}
+        </p>
+        {#if data.store_link.url}
+          <Anchor href={resolveLink(data.store_link)}>Buy this print</Anchor>
+        {/if}
+      {/if}
+    </div>
 
     <nav class="nav">
       {#if !firstPhoto}
