@@ -98,8 +98,11 @@
 
   .header {
     grid-column: 1 / -1;
-    margin-bottom: var(--spacing-3);
     text-align: right;
+    margin-bottom: var(--spacing-2);
+    @media (--mobile) {
+      margin-bottom: var(--spacing-3);
+    }
   }
 
   .frame {

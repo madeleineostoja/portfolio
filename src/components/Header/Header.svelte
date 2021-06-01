@@ -32,7 +32,10 @@
 
 <style>
   .spacer {
-    margin-bottom: var(--spacing-6);
+    margin-bottom: var(--spacing-5);
+    @media (--mobile) {
+      margin-bottom: var(--spacing-6);
+    }
     @media (--tablet) {
       margin-bottom: var(--spacing-7);
     }
