@@ -37,7 +37,7 @@
 <Header />
 
 <Gallery
-  gutter={$media['--tablet'] ? 32 : 16}
+  gutter={$media['--tablet'] ? 32 : 18}
   images={data.photos
     ? data.photos.map(({ photo }) => {
         const { url, dimensions } = photo?.data.photo;
