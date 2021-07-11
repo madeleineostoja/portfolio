@@ -32,7 +32,10 @@
   }
 
   onMount(() => {
-    const headroom = new Headroom(header);
+    const headroom = new Headroom(header, {
+      offset: 50,
+      tolerance: 5
+    });
     headroom.init();
   });
 </script>
@@ -96,7 +99,7 @@
     display: flex;
     align-items: center;
     & > *:not(:last-of-type) {
-      margin-right: 1rem;
+      margin-right: 1.25rem;
     }
   }
 

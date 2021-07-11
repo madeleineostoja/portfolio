@@ -19,6 +19,7 @@
 
 <div class="images {$$props.class}">
   <Gallery
+    rowHeight={300}
     gutter={$media['--tablet'] ? 16 : 8}
     images={images.map(({ dimensions, url, alt }) => ({
       src: url,

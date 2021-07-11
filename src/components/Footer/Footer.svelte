@@ -3,7 +3,12 @@
   import InstagramIcon from '$src/assets/icons/instagram.svelte';
   import MailIcon from '$src/assets/icons/mail.svelte';
   import TwitterIcon from '$src/assets/icons/twitter.svelte';
-  import { ICON_PROPS } from '$src/lib/consts';
+
+  const socialIconProps = {
+    width: '1rem',
+    height: '1rem',
+    fill: 'currentColor'
+  };
 </script>
 
 <style>
@@ -45,7 +50,7 @@
       href="https://twitter.com/madeleineostoja"
       aria-label="Twitter"
     >
-      <TwitterIcon {...ICON_PROPS} />
+      <TwitterIcon {...socialIconProps} />
     </a>
     <a
       use:link
@@ -53,7 +58,7 @@
       href="https://instagram.com/madeleineostoja"
       aria-label="Instagram"
     >
-      <InstagramIcon {...ICON_PROPS} />
+      <InstagramIcon {...socialIconProps} />
     </a>
     <a
       use:link
@@ -61,7 +66,7 @@
       href="mailto:madi@madeleineostoja.com"
       aria-label="Email"
     >
-      <MailIcon {...ICON_PROPS} />
+      <MailIcon {...socialIconProps} />
     </a>
   </div>
 </footer>
