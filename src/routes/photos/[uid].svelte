@@ -178,7 +178,7 @@
 
 <Meta
   title={data.title}
-  description={`${data.title}, captured on ${data.film} with the ${data.camera} by Madeleine Ostoja`}
+  description={`${data.title}, captured on ${data.film}`}
   image={data.photo.url}
 />
 
