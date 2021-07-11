@@ -18,7 +18,7 @@
   .button {
     display: inline-flex;
     align-items: center;
-    font-size: var(--scale-00);
+    font-size: var(--scale-0);
     color: var(--color-text-secondary);
   }
 </style>
