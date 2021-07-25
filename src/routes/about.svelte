@@ -37,8 +37,9 @@
   }
 
   .sidebar-image {
-    margin: 0 0 var(--spacing-2);
+    position: sticky;
     border-radius: var(--radius-2);
+    top: var(--spacing-2);
   }
 
   .article {
