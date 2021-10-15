@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Meta, Story, Template } from '@storybook/addon-svelte-csf';
   import GalleryImage from './GalleryImage.svelte';
 </script>

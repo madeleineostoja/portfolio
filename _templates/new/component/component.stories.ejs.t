@@ -1,7 +1,7 @@
 ---
 to: src/components/<%= name %>/<%= name %>.stories.svelte
 ---
-<script>
+<script lang="ts">
   import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
   import <%= name %> from './<%= name %>.svelte';
 </script>

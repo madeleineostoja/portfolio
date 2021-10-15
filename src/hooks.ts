@@ -2,7 +2,7 @@ import { prerendering } from '$app/env';
 import type { Handle } from '@sveltejs/kit';
 import { minify } from 'html-minifier';
 
-const CONFIG = {
+const MINIFY_CONFIG = {
   collapseBooleanAttributes: true,
   collapseWhitespace: true,
   conservativeCollapse: true,
@@ -22,7 +22,7 @@ const handle: Handle = async ({ request, render }) => {
   const response = await render(request);
 
   if (prerendering && response.headers['content-type'] === 'text/html') {
-    response.body = minify(response.body as string, CONFIG);
+    response.body = minify(response.body as string, MINIFY_CONFIG);
   }
 
   return response;

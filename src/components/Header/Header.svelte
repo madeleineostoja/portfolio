@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import link, { active } from '$src/actions/link';
   import InstagramIcon from '$src/assets/icons/instagram.svelte';
   import MailIcon from '$src/assets/icons/mail.svelte';
@@ -40,14 +40,14 @@
   });
 </script>
 
-<style>
+<style lang="postcss">
   .spacer {
-    margin-bottom: var(--spacing-5);
+    margin-bottom: var(--size-24);
     @media (--mobile) {
-      margin-bottom: var(--spacing-6);
+      margin-bottom: var(--size-32);
     }
     @media (--tablet) {
-      margin-bottom: var(--spacing-7);
+      margin-bottom: var(--size-40);
     }
   }
 
@@ -59,11 +59,11 @@
     position: fixed;
     width: 100%;
     top: 0;
-    padding: var(--spacing-2) 0;
+    padding: var(--size-8) 0;
     background: white;
     transition: transform 300ms ease;
     @media (--mobile) {
-      transform: translateY(var(--spacing-1));
+      transform: translateY(var(--size-5));
     }
     &:global(.headroom--not-top) {
       transform: translateY(0);
@@ -86,12 +86,12 @@
   }
 
   .logo {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     text-transform: uppercase;
     font-size: var(--scale-1);
     margin-right: 2rem;
     line-height: 1;
-    letter-spacing: var(--tracking-00);
+    letter-spacing: var(--tracking-tight);
   }
 
   .nav {
@@ -138,7 +138,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    padding-top: var(--spacing-7);
+    padding-top: var(--size-40);
     align: space-between;
     background: white;
     z-index: var(--layer-5);

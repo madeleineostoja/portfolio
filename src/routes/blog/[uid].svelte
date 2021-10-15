@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   import Footer from '$src/components/Footer/Footer.svelte';
   import Header from '$src/components/Header/Header.svelte';
   import ImageGrid from '$src/components/ImageGrid/ImageGrid.svelte';
@@ -13,11 +13,11 @@
   };
 </script>
 
-<script>
+<script lang="ts">
   export let data: Post;
 </script>
 
-<style>
+<style lang="postcss">
   .content {
     & :global(a) {
       color: var(--color-primary);

@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
@@ -29,20 +29,18 @@
         return doc.photos.some(({ photo }: any) => photo.uid === uid);
       });
 
-    return !!data
-      ? {
-          props: {
-            uid,
-            data,
-            collection
-          },
-          maxage
-        }
-      : undefined;
+    return {
+      props: {
+        uid,
+        data,
+        collection
+      },
+      maxage
+    };
   };
 </script>
 
-<script>
+<script lang="ts">
   export let uid: string;
   export let data: Photo;
   export let collection: PrismicDocument<Collection>;
@@ -76,7 +74,7 @@
     }
   }
 
-  function handleImgSwipe(e: Event) {
+  function handleImgSwipe(e: any) {
     const { left, right } = e.detail.directions;
 
     if (right) {
@@ -92,13 +90,13 @@
   });
 </script>
 
-<style>
+<style lang="postcss">
   .page {
     grid-auto-flow: dense;
     grid-template-rows: auto auto 1fr;
     min-height: 75vh;
     @media (--laptop) {
-      min-height: calc(100vh - var(--spacing-3) - var(--spacing-3));
+      min-height: calc(100vh - var(--size-12) - var(--size-12));
       grid-template-rows: auto 1fr;
     }
   }
@@ -106,9 +104,9 @@
   .header {
     grid-column: 1 / -1;
     text-align: right;
-    margin-bottom: var(--spacing-1);
+    margin-bottom: var(--size-5);
     @media (--mobile) {
-      margin-bottom: var(--spacing-3);
+      margin-bottom: var(--size-12);
     }
   }
 
@@ -135,7 +133,7 @@
 
   .details {
     grid-column: 1 / -1;
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--size-8);
     @media (--tablet) {
       grid-column: 2 / 12;
     }
@@ -146,10 +144,10 @@
 
   .description {
     color: var(--color-text-secondary);
-    margin-top: var(--spacing-2);
+    margin-top: var(--size-8);
     @media (--laptop) {
       margin-top: 1em;
-      max-width: var(--measure-narrow);
+      max-width: var(--measure-sm);
     }
   }
 
@@ -157,9 +155,9 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-top: var(--spacing-2);
+    margin-top: var(--size-8);
     @media (--mobile) {
-      margin-top: var(--spacing-3);
+      margin-top: var(--size-12);
     }
   }
 

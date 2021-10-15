@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   import Anchor from '$src/components/Anchor/Anchor.svelte';
   import Footer from '$src/components/Footer/Footer.svelte';
   import Header from '$src/components/Header/Header.svelte';
@@ -19,15 +19,15 @@
 
   export const load: Load = async ({ fetch }) => {
     const { data } = await queryAt('document.type', 'about', fetch);
-    return !!data ? { props: { data }, maxage } : undefined;
+    return { props: { data }, maxage };
   };
 </script>
 
-<script>
+<script lang="ts">
   export let data: About;
 </script>
 
-<style>
+<style lang="postcss">
   .sidebar {
     display: none;
     @media (--laptop) {
@@ -39,7 +39,7 @@
   .sidebar-image {
     position: sticky;
     border-radius: var(--radius-2);
-    top: var(--spacing-2);
+    top: var(--size-8);
   }
 
   .article {

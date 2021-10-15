@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import link from '$src/actions/link';
   import InstagramIcon from '$src/assets/icons/instagram.svelte';
   import MailIcon from '$src/assets/icons/mail.svelte';
@@ -11,12 +11,12 @@
   };
 </script>
 
-<style>
+<style lang="postcss">
   footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: var(--spacing-6);
+    margin-top: var(--size-32);
     font-size: var(--scale-00);
   }
 

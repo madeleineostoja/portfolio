@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
   /** Title for the header */
   export let title: string;
   /** Whether to make it bigger */
   export let large: boolean | undefined = undefined;
 </script>
 
-<style>
+<style lang="postcss">
   .header {
-    padding-bottom: var(--spacing-1);
+    padding-bottom: var(--size-5);
     border-bottom: 1px solid var(--color-grey-300);
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--size-8);
     @media (--mobile) {
       display: flex;
       align-items: center;

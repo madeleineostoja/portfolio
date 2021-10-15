@@ -1,7 +1,7 @@
 ---
 to: src/routes/<%= name %>.svelte
 ---
-<script context="module">
+<script context="module" lang="ts">
   import Meta from 'svelte-meta';
   import { queryAt, maxage } from '$src/lib/prismic';
   import type { Load } from '@sveltejs/kit';
@@ -13,7 +13,7 @@ to: src/routes/<%= name %>.svelte
   }
 </script>
 
-<script>
+<script lang="ts">
   export let data: <%= h.changeCase.pascal(name) %>;
 </script>
 

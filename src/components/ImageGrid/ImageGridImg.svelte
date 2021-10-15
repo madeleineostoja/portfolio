@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import imgix, { placeholder } from 'svelte-imgix';
 
   export let src: string;

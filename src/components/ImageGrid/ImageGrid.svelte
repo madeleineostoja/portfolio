@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import type { PrismicImg } from '$src/lib/prismic/types';
   import { media } from '$src/lib/stores';
   import Gallery from 'svelte-gallery';
@@ -8,9 +8,9 @@
   export let sizes: string;
 </script>
 
-<style>
+<style lang="postcss">
   .images {
-    margin: var(--spacing-2) 0;
+    margin: var(--size-8) 0;
   }
   img {
     width: 50%;

@@ -2,7 +2,7 @@
   @component
   Image for collections
 -->
-<script>
+<script lang="ts">
   import { resolveDocument } from '$src/lib/prismic';
   import imgix, { placeholder } from 'svelte-imgix';
 
@@ -14,7 +14,7 @@
   export let sizes: string;
 </script>
 
-<style>
+<style lang="postcss">
   a {
     display: block;
     transition: opacity 150ms ease;

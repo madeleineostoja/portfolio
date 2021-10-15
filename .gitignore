@@ -4,6 +4,7 @@ node_modules
 # Runtime
 .DS_Store
 *.log
+.env*
 
 # Build
 /.svelte-kit

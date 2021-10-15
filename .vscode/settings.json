@@ -1,0 +1,7 @@
+{
+  "cssvar.files": [
+    "./node_modules/pollen-css/pollen.css",
+    "./src/styles/variables.css"
+  ],
+  "cssvar.extensions": ["css", "html"]
+}

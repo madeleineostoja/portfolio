@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   import { browser } from '$app/env';
   import { prefetchRoutes } from '$app/navigation';
   import { SITE_URL } from '$src/lib/consts';
@@ -14,26 +14,20 @@
       fetchLinks: 'collection.name'
     });
 
-    return !!data ? { props: { data }, maxage } : undefined;
+    return { props: { data }, maxage };
   };
 </script>
 
-<script>
+<script lang="ts">
   export let data: Global;
   globalData.set(data);
 
-  async function initFullstory() {
-    const Fullstory = await import('@fullstory/browser');
-    Fullstory.init({ orgId: '130YX8 ' });
-  }
-
   if (browser) {
-    initFullstory();
     prefetchRoutes();
   }
 </script>
 
-<style>
+<style lang="postcss">
   main {
     position: relative;
     display: grid;
@@ -41,9 +35,9 @@
     grid-auto-rows: min-content;
     align-items: start;
     min-height: 100%;
-    padding: var(--spacing-2) 0 var(--spacing-3);
+    padding: var(--size-8) 0 var(--size-12);
     @media (--mobile) {
-      padding: var(--spacing-3) 0;
+      padding: var(--size-12) 0;
     }
     & > :global(*) {
       grid-column: 2 / 3;

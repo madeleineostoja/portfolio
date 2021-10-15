@@ -2,7 +2,7 @@
   @component
   Anchor CTA
 -->
-<script>
+<script lang="ts">
   import link from '$src/actions/link';
   import Arrow from '$src/assets/icons/arrow-right.svelte';
 
@@ -10,7 +10,7 @@
   export let href: string;
 </script>
 
-<style>
+<style lang="postcss">
   .anchor {
     display: inline-flex;
     align-items: center;

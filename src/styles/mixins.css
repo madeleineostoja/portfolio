@@ -27,7 +27,7 @@
 .typeset-ui {
   font-size: var(--scale-0);
   line-height: 1;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 /**

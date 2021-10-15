@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import link from '$src/actions/link';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
@@ -14,7 +14,7 @@
   };
 </script>
 
-<style>
+<style lang="postcss">
   .button {
     display: inline-flex;
     align-items: center;

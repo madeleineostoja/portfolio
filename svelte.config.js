@@ -16,7 +16,6 @@ export default {
     }
   },
   preprocess: preprocess({
-    postcss: true,
-    defaults: { style: 'postcss', script: 'typescript' }
+    postcss: true
   })
 };

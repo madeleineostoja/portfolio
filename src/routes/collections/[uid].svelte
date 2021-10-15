@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
   import Footer from '$src/components/Footer/Footer.svelte';
   import GalleryImage from '$src/components/GalleryImage/GalleryImage.svelte';
   import Header from '$src/components/Header/Header.svelte';
@@ -20,11 +20,11 @@
       }
     );
 
-    return !!data ? { props: { data }, maxage } : undefined;
+    return { props: { data }, maxage };
   };
 </script>
 
-<script>
+<script lang="ts">
   export let data: Collection;
 </script>
 
