@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
   import PrevIcon from '$src/assets/icons/caret-left.svelte';
   import NextIcon from '$src/assets/icons/caret-right.svelte';
   import Anchor from '$src/components/Anchor/Anchor.svelte';
@@ -46,11 +45,8 @@
   export let collection: PrismicDocument<Collection>;
 
   const { photos } = collection.data as any,
-    ref = $page.query.get('ref'),
     getPhotoHref = (photosIndex: number) =>
-      `${resolveDocument(photos[photosIndex].photo)}${
-        ref ? `?ref=${ref}` : ''
-      }`;
+      `${resolveDocument(photos[photosIndex].photo)}`;
 
   let photo: HTMLImageElement;
 
@@ -63,7 +59,7 @@
   function handleKeydown({ key }: KeyboardEvent) {
     switch (key) {
       case 'Escape':
-        goto(ref && ref === 'collection' ? resolveDocument(collection) : '/');
+        goto(resolveDocument(collection));
         break;
       case 'ArrowLeft':
         current !== 0 && goto(previousPhoto);

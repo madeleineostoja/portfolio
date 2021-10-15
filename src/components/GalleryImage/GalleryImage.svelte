@@ -32,9 +32,6 @@
   }
 </style>
 
-<a
-  sveltekit:prefetch
-  href="{resolveDocument({ type: 'photo', uid })}?ref=collection"
->
+<a sveltekit:prefetch href={resolveDocument({ type: 'photo', uid })}>
   <img use:imgix={src} src={placeholder(src)} {sizes} {alt} {width} {height} />
 </a>
