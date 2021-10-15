@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "svelte-kit dev --host",
-    "storybook": "start-storybook -p 3002 -s ./static --ci --quiet",
+    "prebuild": "yarn typegen",
     "build": "svelte-kit build",
+    "storybook": "start-storybook -p 3002 -s ./static --ci --quiet",
     "preview": "svelte-kit preview",
     "format": "prettier --write --plugin-search-dir=. .",
     "typegen": "graphql-codegen",
