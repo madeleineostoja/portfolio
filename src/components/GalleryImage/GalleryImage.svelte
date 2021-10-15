@@ -4,7 +4,7 @@
 -->
 <script lang="ts">
   import { resolveDocument } from '$src/lib/prismic';
-  import imgix, { placeholder } from 'svelte-imgix';
+  import imgix, { placeholder } from '$src/actions/imgix';
 
   export let uid: string;
   export let src: string;
