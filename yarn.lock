@@ -11400,10 +11400,9 @@ svelte-hmr@^0.14.7:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.7.tgz#7fa8261c7b225d9409f0a86f3b9ea5c3ca6f6607"
   integrity sha512-pDrzgcWSoMaK6AJkBWkmgIsecW0GChxYZSZieIYfCP0v2oPyx2CYU/zm7TBIcjLVUPP714WxmViE9Thht4etog==
 
-svelte-imgix@^2.4.1:
+"svelte-imgix@https://github.com/madeleineostoja/svelte-imgix.git":
   version "2.4.1"
-  resolved "https://registry.yarnpkg.com/svelte-imgix/-/svelte-imgix-2.4.1.tgz#e48853d2a2ffa8af06f162c5be9f1011a318d421"
-  integrity sha512-rBgzYKSI8QWvL4aJxjMpQacjwH9Y7ZFWFnl7LUEVqPw1HHcJtbcuuhGfWcph94oQKS0LjMCpJ6LnuROcz1uOJg==
+  resolved "https://github.com/madeleineostoja/svelte-imgix.git#136d33b261d220a5b1f325d0a39d1b3b481d492a"
   dependencies:
     query-string "^7.0.0"
 
