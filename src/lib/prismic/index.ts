@@ -105,7 +105,6 @@ export function plaintext(richtext: object) {
 export function prismicImg(img: PrismicImg) {
   return {
     src: placeholder(img.url),
-    alt: img.alt,
-    ...img.dimensions
+    alt: img.alt
   };
 }

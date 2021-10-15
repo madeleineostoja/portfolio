@@ -122,6 +122,7 @@
   .photo {
     object-fit: contain;
     object-position: center top;
+    width: 100%;
     @media (--laptop) {
       max-height: 71vh;
     }

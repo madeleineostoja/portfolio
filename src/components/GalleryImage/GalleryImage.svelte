@@ -9,8 +9,6 @@
   export let uid: string;
   export let src: string;
   export let alt: string;
-  export let width: string;
-  export let height: string;
   export let sizes: string;
 </script>
 
@@ -33,5 +31,5 @@
 </style>
 
 <a sveltekit:prefetch href={resolveDocument({ type: 'photo', uid })}>
-  <img use:imgix={src} src={placeholder(src)} {sizes} {alt} {width} {height} />
+  <img use:imgix={src} src={placeholder(src)} {sizes} {alt} />
 </a>
