@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/collections/black-and-white",
+      "permanent": false
+    }
+  ]
+}
