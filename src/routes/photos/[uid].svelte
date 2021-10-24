@@ -13,7 +13,7 @@
   } from '$src/lib/prismic';
   import type { PrismicDocument } from '$src/lib/prismic/types';
   import { media } from '$src/lib/stores';
-  import { customMedia } from '$src/styles/breakpoints.json';
+  import { customMedia } from '$src/styles/lib/breakpoints.json';
   import type { Collection, Photo } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import { onMount } from 'svelte';
@@ -144,7 +144,7 @@
     margin-top: var(--size-8);
     @media (--laptop) {
       margin-top: 1em;
-      max-width: var(--measure-sm);
+      max-width: var(--prose-xs);
     }
   }
 
@@ -159,7 +159,7 @@
   }
 
   .navIcon {
-    padding: 6px;
+    padding: var(--size-2);
     & :global(svg) {
       fill: currentColor;
       height: var(--scale-1);

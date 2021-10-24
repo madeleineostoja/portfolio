@@ -89,9 +89,9 @@
     font-weight: var(--font-semibold);
     text-transform: uppercase;
     font-size: var(--scale-1);
-    margin-right: 2rem;
-    line-height: 1;
-    letter-spacing: var(--tracking-tight);
+    margin-right: var(--size-8);
+    line-height: var(--line-none);
+    letter-spacing: var(--letter-sm);
   }
 
   .nav {
@@ -99,13 +99,13 @@
     display: flex;
     align-items: center;
     & > *:not(:last-of-type) {
-      margin-right: 1.25rem;
+      margin-right: var(--size-5);
     }
   }
 
   @media not all and (--tablet) {
     .collections {
-      margin-top: 2rem;
+      margin-top: var(--size-8);
     }
     .siteNav {
       display: none;
@@ -158,7 +158,7 @@
     font-size: var(--scale-2);
     color: var(--color-text);
     & > * {
-      margin: 0 1.5rem;
+      margin: 0 var(--size-6);
     }
   }
 </style>

@@ -1,5 +1,6 @@
 import 'cssremedy/css/remedy.css';
 import 'pollen-css/pollen.css';
-import './base.css';
+import 'pollen-css/addons/grid.css';
+import './lib/base.css';
 import './variables.css';
-import './mixins.css';
+import './lib/mixins.css';

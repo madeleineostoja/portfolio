@@ -1,4 +1,4 @@
-import { customMedia } from '$src/styles/breakpoints.json';
+import { customMedia } from '$src/styles/lib/breakpoints.json';
 import type { Global } from '$types/_generated/prismic';
 import watchMedia from 'svelte-media';
 import { writable } from 'svelte/store';

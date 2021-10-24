@@ -5,22 +5,16 @@
  */
 :root {
   /* Typography */
-  --font-family-sans: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --letter-xxs: -0.0175em;
 
   /* Colours */
   --color-text: var(--color-black);
   --color-text-secondary: #6f7487;
   --color-primary: #bb184c;
 
-  /* Layout — Page */
-  --content-max-width: 80rem;
-  --page-gutter: 6vw;
-  --page-gutter-offset: calc(0px - var(--page-gutter));
-  --grid-page: minmax(var(--page-gutter), 1fr)
-    minmax(0, var(--content-max-width)) minmax(var(--page-gutter), 1fr);
-  --grid-content: repeat(12, 1fr);
-
-  /* Layout — Constants */
+  /* Layout */
+  --grid-page-gutter: 6vw;
   --grid-gap: 1rem;
 
   @media (--tablet) {

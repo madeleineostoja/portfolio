@@ -9296,10 +9296,10 @@ polished@^4.0.5:
   dependencies:
     "@babel/runtime" "^7.14.0"
 
-pollen-css@^3.0.0-rc.0:
-  version "3.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/pollen-css/-/pollen-css-3.0.0-rc.0.tgz#22fe6e91b7c519bca3f073c119b0dfe3447a02fa"
-  integrity sha512-GHCgNGeOZ2cUsoPiPL2FIQBdnhxWPJVwqTyFjLJQ3yJ/1ow0bGuSDI2X8HXZLPVhgG/JOaJHI+/37NHibK3Ecg==
+pollen-css@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/pollen-css/-/pollen-css-3.0.1.tgz#32990eba6ead9a28a1ce626600823542704b0fd5"
+  integrity sha512-L2Hwb+aIdZd2iNeUcx4jSLymt0GPq6p5/FMk5JOktc1cbkAUhysx4k5G6YQ550c+VKe0Wz7b9SUK8+vtMaRBcw==
   dependencies:
     css-vars-ponyfill "^2.3.1"
 

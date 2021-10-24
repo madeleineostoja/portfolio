@@ -18,13 +18,13 @@
   }
 
   .name {
-    line-height: 1;
+    line-height: var(--line-none);
     white-space: nowrap;
   }
 
   .action {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: var(--size-4);
     transform: translateX(2px);
     @media (--mobile) {
       margin-top: 0;

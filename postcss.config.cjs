@@ -3,7 +3,7 @@ module.exports = {
     require('postcss-preset-env')({
       stage: 1,
       browsers: 'supports css-variables',
-      importFrom: ['src/styles/breakpoints.json']
+      importFrom: ['src/styles/lib/breakpoints.json']
     })
   ]
 };

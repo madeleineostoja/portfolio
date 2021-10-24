@@ -2,18 +2,18 @@
  * Typesets
  */
 .typeset-paragraph {
-  line-height: var(--leading-large);
+  line-height: var(--line-lg);
   @media (--mobile) {
     font-size: var(--scale-1);
-    letter-spacing: -0.0139em;
+    letter-spacing: var(--letter-xxs);
   }
 }
 
 .typeset-h1,
 .typeset-h2 {
   display: block;
-  line-height: 1.25;
-  letter-spacing: -0.0195em;
+  line-height: var(--line-sm);
+  letter-spacing: var(--letter-xxs);
 }
 
 .typeset-h1 {
@@ -26,7 +26,7 @@
 
 .typeset-ui {
   font-size: var(--scale-0);
-  line-height: 1;
+  line-height: var(--line-none);
   font-weight: var(--font-medium);
 }
 
@@ -39,7 +39,7 @@
   grid-template-columns: var(--grid-page);
   grid-auto-rows: min-content;
   & > * {
-    grid-column: 2 / 3;
+    grid-column: var(--grid-page-main);
   }
 }
 
@@ -49,6 +49,6 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: var(--grid-content);
+  grid-template-columns: var(--grid-12);
   grid-auto-rows: min-content;
 }

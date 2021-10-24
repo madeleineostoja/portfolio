@@ -1,7 +1,15 @@
 {
+  "files.exclude": {
+    "**/.git": true,
+    "build": true,
+    ".svelte-kit": true,
+    "node_modules": true
+  },
   "cssvar.files": [
     "./node_modules/pollen-css/pollen.css",
+    "./node_modules/pollen-css/addons/grid.css",
     "./src/styles/variables.css"
   ],
-  "cssvar.extensions": ["css", "html"]
+  "cssvar.extensions": ["css", "html", "svelte"],
+  "cssvar.disableSort": true
 }

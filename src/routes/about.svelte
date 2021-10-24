@@ -11,7 +11,7 @@
     queryAt,
     richtext
   } from '$src/lib/prismic';
-  import { customMedia } from '$src/styles/breakpoints.json';
+  import { customMedia } from '$src/styles/lib/breakpoints.json';
   import type { About } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import imgix from 'svelte-imgix';
@@ -38,7 +38,7 @@
 
   .sidebar-image {
     position: sticky;
-    border-radius: var(--radius-2);
+    border-radius: var(--radius-sm);
     top: var(--size-8);
   }
 

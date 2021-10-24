@@ -4,7 +4,7 @@
   import Header from '$src/components/Header/Header.svelte';
   import { maxage, queryAt } from '$src/lib/prismic';
   import { media } from '$src/lib/stores';
-  import { customMedia } from '$src/styles/breakpoints.json';
+  import { customMedia } from '$src/styles/lib/breakpoints.json';
   import type { Collection } from '$types/_generated/prismic';
   import type { Load } from '@sveltejs/kit';
   import Gallery from 'svelte-gallery';

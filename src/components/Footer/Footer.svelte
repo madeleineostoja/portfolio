@@ -34,7 +34,7 @@
 
   .socialLink {
     display: block;
-    margin-left: 1.5rem;
+    margin-left: var(--size-6);
   }
 </style>
 
