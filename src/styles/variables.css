@@ -9,9 +9,10 @@
   --letter-xxs: -0.0175em;
 
   /* Colours */
+  --color-black: #10181c;
   --color-text: var(--color-black);
   --color-text-secondary: #6f7487;
-  --color-primary: #bb184c;
+  --color-highlight: #bb184c;
 
   /* Layout */
   --grid-page-gutter: 6vw;

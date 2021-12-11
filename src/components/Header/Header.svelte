@@ -86,7 +86,7 @@
   }
 
   .logo {
-    font-weight: var(--font-semibold);
+    font-weight: var(--weight-semibold);
     text-transform: uppercase;
     font-size: var(--scale-1);
     margin-right: var(--size-8);

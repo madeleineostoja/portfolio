@@ -45,7 +45,7 @@
   .article {
     grid-column: 1 / -1;
     & :global(a) {
-      color: var(--color-primary);
+      color: var(--color-highlight);
     }
     @media (--tablet) {
       grid-column: 2 / 12;

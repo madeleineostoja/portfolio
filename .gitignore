@@ -10,4 +10,5 @@ node_modules
 /.svelte-kit
 /.vercel_build_output
 /build
+/src/styles/pollen.css
 

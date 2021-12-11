@@ -195,15 +195,17 @@
   </div>
   <div class="frame">
     <div>
-      <img
-        class="photo"
-        bind:this={photo}
-        use:imgix={data.photo.url}
-        on:swipe={handleImgSwipe}
-        {...prismicImg(data.photo)}
-        sizes="{customMedia['--tablet']} 50vw, 100vw"
-        alt={data.title}
-      />
+      {#key data.photo.uid}
+        <img
+          class="photo"
+          bind:this={photo}
+          use:imgix={data.photo.url}
+          on:swipe={handleImgSwipe}
+          {...prismicImg(data.photo)}
+          sizes="{customMedia['--tablet']} 50vw, 100vw"
+          alt={data.title}
+        />
+      {/key}
 
       {#if !$media['--mobile']}
         <p class="description">

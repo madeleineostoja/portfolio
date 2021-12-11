@@ -14,7 +14,7 @@
   .anchor {
     display: inline-flex;
     align-items: center;
-    color: var(--color-primary);
+    color: var(--color-highlight);
   }
 
   .label {

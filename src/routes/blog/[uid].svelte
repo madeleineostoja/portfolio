@@ -20,7 +20,7 @@
 <style lang="postcss">
   .content {
     & :global(a) {
-      color: var(--color-primary);
+      color: var(--color-highlight);
     }
   }
 </style>
